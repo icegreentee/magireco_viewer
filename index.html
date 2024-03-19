@@ -1,0 +1,351 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Magia Record Viewer</title>
+    <link rel="icon" type="image/GIF" href="favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="full-screen" content="yes">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true">
+    <link href="css/index.css" rel="stylesheet"/>
+    <script src="./js/lib/jquery.js"></script>
+    <script src="./js/lib/live2dcubismcore.min.js"></script>
+    <script src="./js/lib/pixi.min.js" crossorigin="anonymous"></script>
+    <script src="./js/lib/cubism4.min.js" crossorigin="anonymous"></script>
+</head>
+
+<body style="width:100%;height:100%;padding: 0px; margin: 0px; overflow: auto;">
+
+<div style="width:100%;height:100%;background-color:#000;display:flex; justify-content:center;align-items:center;">
+    <div style="background-color:#ccc;position:relative;" id="bg">
+        <!--        bg-->
+        <canvas id="gameCanvas" width="1920" height="1080" style="outline:none;width:100%;height:100%;"
+                class="gameCanvas" tabindex="99"></canvas>
+        <!--   main_page left-->
+        <div style="width:1.3rem;margin-left:0.2rem;margin-top:0.1rem;position:absolute;left:0;top:0;z-index: 1;display: flex;flex-direction:column;align-items:center;">
+            <img class="char setting" id="back_main" src="./image/image_web\common\global\global_back.png"
+                 style="width:90%;display: none;">
+            <div class="main" id="user_data" style="position:relative;margin-top:8%;margin-bottom:20%;">
+                <img id="chara_avater" src="./image/image_native\card\image\card_13095_f.png"
+                     style="width:100%;position:relative;border-radius: 50%;">
+                <img src="./image/image_web\page\mypage\global_iconframe.png"
+                     style="width:108%;position:absolute;top:-8%;left:-4%;">
+                <div style="display:flex;position:absolute;left:120%;top:0;height:0.7rem">
+                    <div style="margin-right:0.2rem;">
+                        <img src="./image/image_web\common\global\global_expframe.png" style="height:100%;">
+                        <div style="position:absolute;top:35%;left:11%;font-weight: bold;font-size:0.2rem;text-shadow: 0.01rem 0.01rem 0.01rem black;vertical-align:middle;">
+                            135
+                        </div>
+                    </div>
+                    <div style="margin-right:0.3rem;position:relative;">
+                        <img src="./image/image_web\common\global\global_money_wrap.png" style="height:100%;">
+                        <img src="./image/image_web\common\global\plus_btn.png"
+                             style="position:absolute;height:100%;right:-5%;">
+                        <div style="position:absolute;top:36%;left:40%;font-size:0.2rem;text-shadow: 0.01rem 0.01rem 0.01rem black;vertical-align:middle;">
+                            999999
+                        </div>
+                    </div>
+                    <div style="position:relative;">
+                        <img src="./image/image_web\common\global\global_ap_wrap.png" style="height:100%;">
+                        <img src="./image/image_web\common\global\plus_btn.png"
+                             style="position:absolute;height:100%;right:-5%;">
+                        <div style="position:absolute;top:36%;left:40%;font-size:0.2rem;text-shadow: 0.01rem 0.01rem 0.01rem black;vertical-align:middle;">
+                            157/157
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img class="main" src="./image/image_web\page\mypage\global_present.png" style="width:90%;">
+            <img class="main" src="./image/image_web\page\mypage\global_announce.png" style="width:90%;">
+            <img class="main" src="./image/image_web\page\mypage\global_etc.png" style="width:90%;" id="setting">
+            <img class="main" src="./image/image_web\page\mypage\btn_live2d_02.png" style="width:90%;margin-top:0.1rem;"
+                 id="change_custom">
+            <img class="main" src="./image/image_web\page\mypage\btn_live2d_02.png"
+                 style="width:90%;margin-top:0.1rem;display: none;" id="change_custom2">
+        </div>
+
+        <!--    main_page right-->
+        <div
+                style="position:absolute;top:0;right:0;width:2.3rem;z-index: 1;display: flex;flex-direction:column;align-items:center;">
+            <img class="main" src="./image/image_web\common\global\global_menu.png" style="width:100%;">
+            <img class="main" id="menu_char" src="./image/image_web\common\global\global_unit.png"
+                 style="width:84%;margin-top:-14%;">
+            <img class="main" src="./image/image_web\common\global\global_memoria.png"
+                 style="width:84%;margin-top:-14%;">
+            <img class="main" src="./image/image_web\common\global\global_gacha.png" style="width:84%;margin-top:-14%;">
+            <img class="main" src="./image/image_web\common\global\global_mission.png"
+                 style="width:84%;margin-top:-14%;">
+            <img class="main" src="./image/image_web\common\global\global_shop.png" style="width:84%;margin-top:-14%;">
+            <img class="main" src="./image/image_web\common\global\global_quest.png"
+                 style="display:flex;position:absolute;right:100%;bottom:0%;width:140%;">
+            <!--            <img class="main" src="./image/image_web\common\global\global_team.png"-->
+            <!--                 style="display:flex;position:absolute;right:130%;bottom:35%;width:100%;">-->
+            <img class="main" src="./image/image_web\common\global\global_team.png"
+                 style="display:flex;position:absolute;right:230%;bottom:25%;width:100%;">
+            <img class="main" src="./image/image_web\common\global\global_battle.png"
+                 style="display:flex;position:absolute;right:260%;bottom:1%;width:100%;" id="right_area_extra">
+
+        </div>
+        <!--    main_page live2d-->
+        <canvas class="main" id="canvas" style="position:absolute;top:0;left:0;height:100%;"></canvas>
+        <!--    char_page left-->
+        <div class="char" id="char_left" style="position:absolute;left: 0%;top:0%;width: 4.5rem;display: none;">
+            <img src="./image/image_web\page\chara\bg_chara_data.png" style="width: 100%;">
+            <img id="chara_attr" src="./image/image_web/common/chara/att_water_f.png"
+                 style="width: 15%;position:absolute;top: 18%;left: 42.5%;">
+            <p id="chara_name"
+               style="position:absolute;top: 28%;width: 100%;text-align: center;color: #5B3072;font-size:0.3rem;">
+                水波玲奈
+            </p>
+            <div style="position: absolute;left: 0;top:45%;width: 100%;">
+                <div style="width: 100%;display: flex;overflow: hidden;flex-wrap: wrap;justify-content: center;">
+                    <div class="chara_rank" id="chara_rank1">
+                        <img id="chara_rank1_attr_bg" src="./image/image_native/card/frame/bg_water.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank1_head" src="./image/image_native\card\image\card_13095_f.png"
+                             style="position: absolute;left: 0;width: 96%;height: 96%;padding-top:2%;border-radius: 50%;"/>
+                        <img src="./image/image_native/card/frame/frame_rank_1.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank1_attr" src="./image/image_native/card/frame/att_water.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank1_select" src="./image/image_web/common/chara/icon_select.png"
+                             style="position: absolute;left: 25%;top:25%;width: 50%;height: 50%;display: none;"/>
+                    </div>
+                    <div class="chara_rank" id="chara_rank2">
+                        <img id="chara_rank2_attr_bg" src="./image/image_native/card/frame/bg_water.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank2_head" src="./image/image_native\card\image\card_13095_f.png"
+                             style="position: absolute;left: 0;width: 96%;height: 96%;padding-top:2%;border-radius: 50%;"/>
+                        <img src="./image/image_native/card/frame/frame_rank_2.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank2_attr" src="./image/image_native/card/frame/att_water.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank2_select" src="./image/image_web/common/chara/icon_select.png"
+                             style="position: absolute;left: 25%;top:25%;width: 50%;height: 50%;display: none;"/>
+                    </div>
+                    <div class="chara_rank" id="chara_rank3">
+                        <img id="chara_rank3_attr_bg" src="./image/image_native/card/frame/bg_water.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank3_head" src="./image/image_native\card\image\card_13095_f.png"
+                             style="position: absolute;left: 0;width: 96%;height: 96%;padding-top:2%;border-radius: 50%;"/>
+                        <img src="./image/image_native/card/frame/frame_rank_3.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank3_attr" src="./image/image_native/card/frame/att_water.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank3_select" src="./image/image_web/common/chara/icon_select.png"
+                             style="position: absolute;left: 25%;top:25%;width: 50%;height: 50%;display: none;"/>
+                    </div>
+                    <div class="chara_rank" id="chara_rank4">
+                        <img id="chara_rank4_attr_bg" src="./image/image_native/card/frame/bg_water.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank4_head" src="./image/image_native\card\image\card_13095_f.png"
+                             style="position: absolute;left: 0;width: 96%;height: 96%;padding-top:2%;border-radius: 50%;"/>
+                        <img src="./image/image_native/card/frame/frame_rank_4.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank4_attr" src="./image/image_native/card/frame/att_water.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank4_select" src="./image/image_web/common/chara/icon_select.png"
+                             style="position: absolute;left: 25%;top:25%;width: 50%;height: 50%;display: none;"/>
+                    </div>
+                    <div class="chara_rank" id="chara_rank5">
+                        <img id="chara_rank5_attr_bg" src="./image/image_native/card/frame/bg_water.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank5_head" src="./image/image_native\card\image\card_13095_f.png"
+                             style="position: absolute;left: 0;width: 96%;height: 96%;padding-top:2%;border-radius: 50%;"/>
+                        <img src="./image/image_native/card/frame/frame_rank_5.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank5_attr" src="./image/image_native/card/frame/att_water.png"
+                             style="position: absolute;left: 0;width: 100%;height: 100%;"/>
+                        <img id="chara_rank5_select" src="./image/image_web/common/chara/icon_select.png"
+                             style="position: absolute;left: 25%;top:25%;width: 50%;height: 50%;display: none;"/>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div style="position: absolute;left: 25%;width: 100%;">
+                <img id="favorite_set" src="./image/image_web\page\chara\conf_leader_off.png"
+                     style="width:50%;margin-top: 5%;">
+                <img id="favorite2_set" src="./image/image_web\page\chara\conf_leader_off.png"
+                     style="width:50%;margin-top: 5%;">
+                <img id="change_pose" src="./image/image_web\page\chara\btn_pose.png"
+                     style="width: 25%;position: absolute;right: 12%;top: -12%;">
+                <div id="pose_name"
+                     style="position:absolute;top: 1.15rem;right: 12%;width: 25%;text-align: center;color: #5B3072;font-size:0.2rem;">
+                    待机
+                </div>
+            </div>
+
+            <!-- <img src="./image_web\page\chara\conf_leader_on.png" style="width: 50%;"> -->
+        </div>
+        <!--    char_page bottom-->
+        <div class="char" id="chara_list" style="position:absolute;bottom: 0;width: 100%;height:20%;display: none;">
+            <img src="./image/image_web/common/chara/bg_chara_list_a.png"
+                 style="width: 100%;height:100%;position:absolute;bottom: 0;"
+                 alt="">
+            <div id="char_filter">
+                <img src="./image/image_web/common/chara/btn_chara_list.png"
+                     style="width:2.4rem;height:40%;position:absolute;right: 0;top: 30%;z-index: 1;" alt="">
+                <div style="height:40%;display:flex;align-items:center;position:absolute;right: 7%;top: 29%;font-size:0.3rem;text-align: center;color: #A8772B;z-index: 1;">
+                    筛选
+                </div>
+                <img id="char_filter_off" src="./image/image_web/common/filter/icon_filter_off.png"
+                 style="height:20%;position:absolute;right: 1%;top: 40%;z-index: 1;" alt="">
+                <img id="char_filter_on" src="./image/image_web/common/filter/icon_filter_on.png"
+                 style="height:20%;position:absolute;right: 1%;top: 40%;z-index: 1;display:none;" alt="">
+            </div>
+            <div id="chara_head_list" style="position: absolute;left: 3%;bottom: 0;height: 100%;width: 85%;
+	display: flex;align-items:center;overflow-y: hidden;overflow-x: auto;">
+            </div>
+        </div>
+        <!--    char_page filter-->
+        <div class="char_filter_black">
+            <div class="char_filter_img">
+                <div style="color:#5B5B5B;font-size:0.8rem;margin-bottom:0.8rem;">按照条件筛选魔法少女</div>
+                <div style="display:flex;width:100%;justify-content:center;color:#5B5B5B;font-size:0.6rem;margin-bottom:0.5rem;">
+                    属性：
+                    <div id="filter_attr_all" style="display:flex;margin-right:0.3rem;position:relative;color:#5B5B5B;font-size:0.6rem;">
+                        All
+                        <img style="width:0.6rem;margin-left:0.2rem;"
+                             src="./image/image_web/common/icon/icon_checkbox.png">
+                        <img id="filter_attr_all_checkbox" src="./image/image_web/common/icon/icon_checkbox_check.png"
+                             style="position:absolute;right:0.05rem;top:0.1rem;height:0.4rem;">
+                    </div>
+                </div>
+                <div style="display:flex;width:100%;justify-content:center;margin-bottom:0.8rem;">
+                    <div id="filter_attr_fire" style="display:flex;margin-right:0.3rem;position:relative;">
+                        <img style="width:0.8rem;margin-right:0.2rem;"
+                             src="./image/image_web/common/chara/att_fire_f.png">
+                        <img style="width:0.8rem;" src="./image/image_web/common/icon/icon_checkbox.png">
+                        <img id="filter_attr_fire_checkbox" src="./image/image_web/common/icon/icon_checkbox_check.png"
+                             style="position:absolute;right:0.1rem;top:0.15rem;height:0.5rem;display:none;">
+                    </div>
+                    <div id="filter_attr_water" style="display:flex;margin-right:0.3rem;position:relative;">
+                        <img style="width:0.8rem;margin-right:0.2rem;"
+                             src="./image/image_web/common/chara/att_water_f.png">
+                        <img style="width:0.8rem;" src="./image/image_web/common/icon/icon_checkbox.png">
+                        <img id="filter_attr_water_checkbox" src="./image/image_web/common/icon/icon_checkbox_check.png"
+                             style="position:absolute;right:0.1rem;top:0.15rem;height:0.5rem;display:none;">
+                    </div>
+                    <div id="filter_attr_timber" style="display:flex;margin-right:0.3rem;position:relative;">
+                        <img style="width:0.8rem;margin-right:0.2rem;"
+                             src="./image/image_web/common/chara/att_timber_f.png">
+                        <img style="width:0.8rem;" src="./image/image_web/common/icon/icon_checkbox.png">
+                        <img id="filter_attr_timber_checkbox" src="./image/image_web/common/icon/icon_checkbox_check.png"
+                             style="position:absolute;right:0.1rem;top:0.15rem;height:0.5rem;display:none;">
+                    </div>
+                    <div id="filter_attr_light" style="display:flex;margin-right:0.3rem;position:relative;">
+                        <img style="width:0.8rem;margin-right:0.2rem;"
+                             src="./image/image_web/common/chara/att_light_f.png">
+                        <img style="width:0.8rem;" src="./image/image_web/common/icon/icon_checkbox.png">
+                        <img id="filter_attr_light_checkbox" src="./image/image_web/common/icon/icon_checkbox_check.png"
+                             style="position:absolute;right:0.1rem;top:0.15rem;height:0.5rem;display:none;">
+                    </div>
+                    <div id="filter_attr_dark" style="display:flex;margin-right:0.3rem;position:relative;">
+                        <img style="width:0.8rem;margin-right:0.2rem;"
+                             src="./image/image_web/common/chara/att_dark_f.png">
+                        <img style="width:0.8rem;" src="./image/image_web/common/icon/icon_checkbox.png">
+                        <img id="filter_attr_dark_checkbox" src="./image/image_web/common/icon/icon_checkbox_check.png"
+                             style="position:absolute;right:0.1rem;top:0.15rem;height:0.5rem;display:none;">
+                    </div>
+                    <div id="filter_attr_void" style="display:flex;margin-right:0.3rem;position:relative;">
+                        <img style="width:0.8rem;margin-right:0.2rem;"
+                             src="./image/image_web/common/chara/att_void_f.png">
+                        <img style="width:0.8rem;" src="./image/image_web/common/icon/icon_checkbox.png">
+                        <img id="filter_attr_void_checkbox" src="./image/image_web/common/icon/icon_checkbox_check.png"
+                             style="position:absolute;right:0.1rem;top:0.15rem;height:0.5rem;display:none;">
+                    </div>
+                </div>
+                <div style="color:#5B5B5B;font-size:0.6rem;margin-bottom:1rem;">
+                    名字：
+                    <input id="filter_name" type="text">
+                </div>
+                <div id="filter_btn" style="position:relative;">
+                    <img style="width:3rem;" src="./image/image_web/page/chara/btn_pink.png">
+                    <div style="font-size:0.5rem;color:#fff;position:absolute;width:100%;top:0.2rem;text-shadow: -0.01rem -0.01rem 0 #FF5E7D, 0.01rem -0.01rem 0 #FF5E7D,-0.01rem 0.01rem 0 #FF5E7D,0.01rem 0.01rem 0 #FF5E7D;">
+                        确定
+                    </div>
+                </div>
+            </div>
+            <img id="char_filter_close" src="../image/image_web/common/popup/popup_close.png"
+                 style="position:absolute; right:0;top:0;z-index:2;width:0.8rem;">
+        </div>
+
+        <!--    char_page right-->
+        <div class="char" id="char_card" style="position:absolute;right: 5%;top:2%;width: 5.2rem;display: none;">
+            <img id="char_card_c" src="./image/image_native\card\image\card_13095_c.png"
+                 style="width: 100%;position:relative;">
+            <img id="char_card_f" src="./image/image_native\card\frame\frame_water_rank_5.png"
+                 style="width: 100%;position:absolute;left:0;">
+        </div>
+        <!--    setting_page-->
+        <div class="setting setting_img" style="width:60%;height:80%;left:20%;top:10%;position:absolute;">
+            <div>
+                <div style="color:#FE509E;font-size:0.45rem;">
+                    <img src="./image/image_web/common/frame/title_icon.png" style="width:0.3rem;">
+                    Live2d数量:
+                </div>
+                <div style="color:#333333;font-size:0.4rem;height:0.4rem;margin:0.2rem;" id="live2d_num_check1">
+                    <img src="./image/image_web/common/icon/icon_checkbox.png" style="height:100%;">
+                    <img src="./image/image_web/common/icon/icon_checkbox_check.png" id="live2d_num_checkbox1"
+                         style="position:absolute;left:0;height:0.35rem;display:none;margin-left:0.2rem;">
+                    1个Live2d人物
+                </div>
+                <div style="color:#333333;font-size:0.4rem;height:0.4rem;margin:0.2rem;" id="live2d_num_check2">
+                    <img src="./image/image_web/common/icon/icon_checkbox.png" style="height:100%;">
+                    <img src="./image/image_web/common/icon/icon_checkbox_check.png" id="live2d_num_checkbox2"
+                         style="position:absolute;left:0;height:0.35rem;display:none;margin-left:0.2rem;">
+                    2个Live2d人物
+                </div>
+            </div>
+
+            <div>
+                <div style="color:#FE509E;font-size:0.45rem;">
+                    <img src="./image/image_web/common/frame/title_icon.png" style="width:0.3rem;">
+                    更换背景:
+                </div>
+                <div style="color:#333333;font-size:0.4rem;height:0.8rem;margin:0.2rem;">
+                    <img id="change_bg" src="./image/image_web/page/profile/btn_background_change.png"
+                         style="height:100%;">
+                </div>
+            </div>
+        </div>
+        <!--    bg_change_page-->
+        <div class="bg_change bg_change_img" style="width:5.7rem;height:80%;right:4%;top:10%;position:absolute;">
+            <img src="./image/image_web/common/frame/frame_title.png" class="frame_title"
+                 style="width:6.1rem;height:7%;margin:-0.19rem;">
+            <div class="bg_change_font">主页背景</div>
+            <div class="bg_change_list">
+                <!--                <div class="bg_change_btn">-->
+                <!--                    <div class="bg_change_btn_2">-->
+                <!--                        <img class="bg_change_btn_2_img" src="./image/image_web/page/profile/icon_home.png">-->
+                <!--                        <div class="bg_change_btn_2_t"  >abcd</div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+            </div>
+
+            <div style="position:absolute;width:90%;height:10%;left:5%;top:88%;">
+                <img style="position:absolute;top:0;width:46%;height:100%;left:27%;"
+                     src="./image/image_web/page/chara/btn_pink.png">
+                <div class="bg_change_btn_font" id="change_bg_btn">确定</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/frameworks/cocos2d-html5/CCBoot.js"></script>
+<!-- <script src="js/magiLive2d/js/live2d.js"></script> -->
+<script src="js/src/live2d.js"></script>
+<!--<script src="src/page.js"></script>-->
+<script src="./js/game_main.js"></script>
+<script src="./js/main_page.js"></script>
+<script src="./js/char_page.js"></script>
+<script src="./js/setting_page.js"></script>
+<script src="./js/event.js"></script>
+</body>
+
+</html>

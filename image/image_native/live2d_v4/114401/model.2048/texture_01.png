@@ -1,0 +1,202 @@
+<html lang="ja" style="height: 576px;">
+
+<head>
+    <meta charset="UTF-8">
+    <title>magica</title>
+    <meta id="viewport" name="viewport" content="width=1024, user-scalable=no">
+    <meta name="format-detection" content="email=no,telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="/magica/css/_common/sanitize.css">
+    <link rel="stylesheet" href="/magica/css/_common/common.css">
+    <link rel="stylesheet" href="/magica/css/_common/base.css">
+    <style id="headStyle">
+    #NewVersionRecommend {
+        width: 1024px;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #NewVersionRecommend .topBtn {
+        width: 110px;
+        height: 28px;
+        background: url("/magica/resource/image_web/page/top/btn_bg00.png") left top no-repeat;
+        background-size: 110px 28px;
+        display: inline-block;
+        color: #6e6e6e;
+        font-size: 12px;
+        line-height: 28px;
+        text-align: center;
+        text-shadow: 0 0;
+    }
+
+    #NewVersionRecommend .logo {
+        width: 728px;
+        position: absolute;
+        top: -webkit-calc(50% - 280px);
+        left: -webkit-calc(50% - 364px);
+    }
+
+    #NewVersionRecommend .logo img {
+        width: 728px;
+    }
+
+    #NewVersionRecommend #transferInner {
+        display: none;
+    }
+
+    #NewVersionRecommend #movieStartBtn {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        z-index: 80;
+    }
+
+    #NewVersionRecommend #transferBtn {
+        display: block;
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        z-index: 80;
+    }
+
+    #NewVersionRecommend #clearBtn {
+        display: block;
+        position: absolute;
+        bottom: 10px;
+        left: 135px;
+        z-index: 80;
+    }
+
+    #NewVersionRecommend #versionReccommend {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 30px;
+        text-align: center;
+        z-index: 20;
+    }
+
+    #NewVersionRecommend #versionReccommend .versionReccommendTxt {
+        width: 100%;
+        margin: 0 auto;
+        display: block;
+        position: absolute;
+        top: -webkit-calc(50% + 105px);
+        left: 0;
+        font-size: 20px;
+        text-align: center;
+        text-shadow: 2px 0 2px #fff, -2px 0 2px #fff, 0 2px 2px #fff, 0 -2px 2px #fff, 2px 2px 2px #fff, -2px 2px 2px #fff, 2px -2px 2px #fff, -2px -2px 2px #fff;
+        z-index: 10;
+    }
+
+    #NewVersionRecommend #versionReccommend .versionReccommendTxt02 {
+        width: 100%;
+        margin: 0 auto;
+        display: block;
+        position: absolute;
+        top: -webkit-calc(50% + 140px);
+        left: 0;
+        font-size: 16px;
+        text-align: center;
+        text-shadow: 2px 0 2px #fff, -2px 0 2px #fff, 0 2px 2px #fff, 0 -2px 2px #fff, 2px 2px 2px #fff, -2px 2px 2px #fff, 2px -2px 2px #fff, -2px -2px 2px #fff;
+        z-index: 10;
+    }
+
+    #NewVersionRecommend #versionReccommend #verUpBtn {
+        width: 230px;
+        position: absolute;
+        top: -webkit-calc(50% + 204px);
+        left: -webkit-calc(50% - 115px);
+        z-index: 50;
+        background: url("/magica/resource/image_web/common/btn/btn_pink_c.png") center top no-repeat;
+        background-size: -webkit-calc(100% - 66px) 64px;
+    }
+
+    #NewVersionRecommend #versionReccommend #verUpBtn,
+    #NewVersionRecommend #versionReccommend #verUpBtn span {
+        color: #fff;
+        text-shadow: -1px -1px 2px #ff5e7c, 1px -1px 2px #ff5e7c, -1px 1px 2px #ff5e7c, 1px 1px 2px #ff5e7c, -1px -1px 2px #ff5e7c, 1px -1px 2px #ff5e7c, -1px 1px 2px #ff5e7c, 1px 1px 2px #ff5e7c;
+    }
+
+    #NewVersionRecommend #versionReccommend #verUpBtn:before {
+        background: url("/magica/resource/image_web/common/btn/btn_pink_l.png") left top no-repeat;
+    }
+
+    #NewVersionRecommend #versionReccommend #verUpBtn:after {
+        background: url("/magica/resource/image_web/common/btn/btn_pink_r.png") left top no-repeat;
+    }
+
+    #NewVersionRecommend #app_ver,
+    #NewVersionRecommend #app_new_ver {
+        position: absolute;
+        left: 700px;
+        font-size: 14px;
+        line-height: 1.1;
+        text-align: left;
+        z-index: 20;
+    }
+
+    #NewVersionRecommend #app_ver {
+        bottom: 30px;
+    }
+
+    #NewVersionRecommend #app_new_ver {
+        bottom: 10px;
+    }
+
+    #NewVersionRecommend #contactBtn {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        z-index: 500;
+    }
+    </style>
+</head>
+
+<body class="ios">
+    <div id="ready" class="">.</div>
+    <div class="debug"></div>
+    <!-- ローディング -->
+    <div id="loading" style="display: none;">
+        <p></p>
+    </div>
+    <div id="tapBlock" style=""></div>
+    <div id="popupArea">
+        <div id="popupCurtain"></div>
+    </div>
+    <div id="overlapContainer">
+        <div id="curtain"></div>
+    </div>
+    <!-- Android、ポップアップした時のクリック壁の為に -->
+    <div id="AndroidLinkStop"></div>
+    <!-- コンテンツ領域 -->
+    <div id="baseContainer" class="fadein">
+        <div id="tutorialContainer">
+            <div class="bgWrap"></div>
+            <div class="overlayWrap"></div>
+            <div class="arrowWrap"></div>
+            <div class="arrow2Wrap"></div>
+            <div class="textWrap"></div>
+        </div>
+        <div id="mainContent">
+            <div>
+                <div id="NewVersionRecommend">
+                    <div>
+                        <div class="logo">
+                            <img src="/magica/resource/image_web/common/logo/logo.png" alt="">
+		</div>
+                            <div id="versionReccommend" data-href="">
+                                <span class="versionReccommendTxt c_purple">新しいバージョンがあります。ストアで最新版をダウンロードしてください。</span>
+                                <span class="versionReccommendTxt02 c_gold">ストアに最新版が公開されていない場合は暫くお待ちください。<br>
+			アプリを削除してしまうとデータが初期化されてしまいますのでご注意ください。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
