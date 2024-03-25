@@ -42,60 +42,7 @@ function init(x, y) {
     app = new PIXI.Application(option);
 }
 
-var group_25= [
-        {
-          "autoTurnFirst": 1.0,
-          "chara": [
-            {
-              "cheek": 0,
-              "eyeClose": 0,
-              "face": "mtn_ex_050.exp.json",
-              "id": 100100,
-              "motion": 0,
-              "pos": 1,
-              "voice": "vo_char_1001_00_33"
-            }
-          ]
-        },
-        {
-          "autoTurnFirst": 2.5,
-          "chara": [
-            {
-              "id": 100100,
-              "motion": 100
-            }
-          ]
-        },
-        {
-          "autoTurnFirst": 1.0,
-          "chara": [
-            {
-              "cheek": 1,
-              "id": 100100
-            }
-          ]
-        },
-        {
-          "autoTurnFirst": 2.8,
-          "chara": [
-            {
-              "id": 100100,
-              "motion": 1
-            }
-          ]
-        },
-        {
-          "autoTurnFirst": 1.7,
-          "chara": [
-            {
-              "cheek": 1,
-              "face": "mtn_ex_030.exp.json",
-              "id": 100100,
-              "motion": 200
-            }
-          ]
-        }
-      ]
+
 async function _show(model, pos_x) {
     const settings = new PIXI.live2d.Cubism4ModelSettings(model);
     const live2dSprite = await PIXI.live2d.Live2DModel.from(settings);
@@ -117,42 +64,52 @@ async function _show(model, pos_x) {
     var delay_play = null
     live2dSprite.on("hit",function(){
         if(playing){
-            playing =false
-            source.stop()
-            clearTimeout(motion_task)
-            live2dSprite.internalModel.motionManager.stopAllMotions()
+            stop_motion()
             clearTimeout(delay_play)
             delay_play= setTimeout(function(){
                 playing=true
                 get_motion_list();
-                run_motion();
+//                run_motion();
             },400)
         }else{
             playing=true
             get_motion_list();
-            run_motion();
+//            console.log(motion_list)
+//            run_motion();
         }
     })
-    let motion_list = []
+    var motion_list = []
     function get_motion_list(){
         motion_list = []
-        let group = group_25
-        for(let i=0;i<group.length;i++){
-            let dic={}
-            let sleep_time = group[i]["autoTurnFirst"]*1000
-            dic["time"] = sleep_time
-            let chara = group[i]["chara"][0]
-            if("voice" in chara){
-                dic["voice"] = chara["voice"]+".mp3"
-            }
-            if("motion" in chara){
-                dic["motion"] = motions_list[chara["motion"]]
-            }
-            if("face" in chara){
-                dic["face"] = exp_list[chara["face"]]
-            }
-            motion_list.push(dic)
+        let cus_id = customs[custom_index]
+        let jsonfile ="image/scenario/json/general/"
+        if("motion" in chara_data[fav_char_id]["live2d"][cus_id]){
+            jsonfile += cus_id+".json"
         }
+        else{
+            jsonfile += cus_id.slice(0,4)+"00.json"
+        }
+        fetchLocal(jsonfile).then(r => r.json(), alert).then(list => {
+            group_dic=list["story"];
+            group = group_dic["group_25"];
+            for(let i=0;i<group.length;i++){
+                let dic={}
+                let sleep_time = group[i]["autoTurnFirst"]*1000
+                dic["time"] = sleep_time
+                let chara = group[i]["chara"][0]
+                if("voice" in chara){
+                    dic["voice"] = chara["voice"]+".mp3"
+                }
+                if("motion" in chara){
+                    dic["motion"] = motions_list[chara["motion"]]
+                }
+                if("face" in chara){
+                    dic["face"] = exp_list[chara["face"]]
+                }
+                motion_list.push(dic)
+            }
+            run_motion();
+        })
     }
     var motion_task = null
     function run_motion(){
@@ -190,6 +147,12 @@ async function _show(model, pos_x) {
     live2dSprite.internalModel.on('afterMotionUpdate', function() {
         run()
     })
+    function stop_motion(){
+        playing =false
+        source.stop()
+        clearTimeout(motion_task)
+        live2dSprite.internalModel.motionManager.stopAllMotions()
+    }
     var playing = false;
     let audioCtx = new AudioContext();
     // 新建分析仪
@@ -198,7 +161,8 @@ async function _show(model, pos_x) {
     let frequencyData = new Uint8Array(analyser.frequencyBinCount);
     let request = new XMLHttpRequest();
     let source = audioCtx.createBufferSource();
-    function loadSound(){
+    function loadSound(v){
+        document.addEventListener('click', stop_motion);
         audioCtx = new AudioContext();
         // 新建分析仪
         analyser = audioCtx.createAnalyser();
@@ -206,7 +170,7 @@ async function _show(model, pos_x) {
         frequencyData = new Uint8Array(analyser.frequencyBinCount);
         request = new XMLHttpRequest();
         source = audioCtx.createBufferSource();
-        request.open('GET', 'image/sound_native/voice/vo_char_1001_00_33.mp3', true);
+        request.open('GET', 'image/sound_native/voice/'+v, true);
         request.responseType = 'arraybuffer';
         request.onload = ()=>{
             const audioData = request.response;
@@ -224,6 +188,7 @@ async function _show(model, pos_x) {
                     playing = false;
                     source.disconnect();
                     source=null;
+                    document.removeEventListener('click', stop_motion);
                 }
             });
         };
