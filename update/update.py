@@ -53,7 +53,8 @@ download_base_dir = "../image/"
 download_dir = ["/card/image/",
                 "/live2d_v4/",
                 "/mini/anime_v2/",
-                "/bg/web/"]
+                "/bg/web/",
+                "scenario/json/general"]
 
 
 # 分析出需要下载的文件
@@ -63,6 +64,7 @@ def eval_assets():
     live2d_data_list = []
     mini_data_list = []
     bg_list = []
+    json_general = []
     data = read_json_file(MAIN_JSON)
     for i in data:
         data_path = i["path"]
@@ -101,9 +103,10 @@ def eval_assets():
                 else:
                     if not os.path.isfile(download_base_dir + data_path):
                         bg_list.append([data_path, i["file_list"]])
-
+        elif download_dir[4] in data_path and not os.path.isfile(download_base_dir + data_path):
+            json_general.append([data_path, i["file_list"]])
     os.remove(MAIN_JSON)
-    return card_data_list, live2d_data_list, mini_data_list, bg_list
+    return card_data_list, live2d_data_list, mini_data_list, bg_list, json_general
 
 
 def unzip(file):
@@ -116,7 +119,7 @@ def unzip(file):
     return file[:-3]
 
 
-def download_chara_file(card_data_list, live2d_data_list, mini_data_list):
+def download_chara_file(card_data_list, live2d_data_list, mini_data_list, json_general):
     print("开始下载")
     down_num = 0
     for i in card_data_list:
@@ -133,11 +136,18 @@ def download_chara_file(card_data_list, live2d_data_list, mini_data_list):
     down_num = 0
     for i in mini_data_list:
         download_files_list(i[0], i[1], base_path + "resource/", "../image/")
-        if i.split(".")[-1] == "gz":
+        if i[0].split(".")[-1] == "gz":
             unzip("../image/" + i)
         down_num += 1
         print("\r", end="")
         print("mini下载: {} / {} ".format(down_num, len(mini_data_list)), end="")
+    for i in json_general:
+        download_files_list(i[0], i[1], base_path + "resource/", "../image/")
+        if i[0].split(".")[-1] == "gz":
+            unzip("../image/" + i)
+        down_num += 1
+        print("\r", end="")
+        print("mini下载: {} / {} ".format(down_num, len(json_general)), end="")
     print("\n下载完毕")
 
 
@@ -152,10 +162,13 @@ def get_all_live2d():
             charaname = json.load(f)["charaName"].strip().replace('(圧縮)', '').replace('（圧縮）', '').replace('_圧縮',
                                                                                                               '').strip(
                 '_圧縮').replace(' ', '')
+        dic={"name":charaname}
+        if os.path.isfile(download_base_dir + "scenario/json/general/"+live2d_dir+".json"):
+            dic["motion"]="y"
         if char_id not in chars:
-            chars[char_id] = {live2d_dir: charaname}
+            chars[char_id] = {live2d_dir: dic}
         else:
-            chars[char_id][live2d_dir] = charaname
+            chars[char_id][live2d_dir] = dic
     return chars
 
 
@@ -255,12 +268,13 @@ def gen_bg_json():
 
 
 def main():
-    card_data_list, live2d_data_list, mini_data_list, bg_list = eval_assets()
-    if len(card_data_list) != 0 and len(live2d_data_list) != 0 and len(mini_data_list) != 0:
+    card_data_list, live2d_data_list, mini_data_list, bg_list, json_general = eval_assets()
+    if len(card_data_list) != 0 or len(live2d_data_list) != 0 or len(mini_data_list) != 0 or len(json_general) != 0:
         print("card需要下载" + str(len(card_data_list)))
         print("live2d需要下载" + str(len(live2d_data_list)))
         print("mini需要下载" + str(len(mini_data_list)))
-        download_chara_file(card_data_list, live2d_data_list, mini_data_list)
+        print("json_general需要下载" + str(len(json_general)))
+        download_chara_file(card_data_list, live2d_data_list, mini_data_list, json_general)
         gen_chara_json()
     else:
         print("角色表无新的更新")

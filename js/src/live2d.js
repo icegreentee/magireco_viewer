@@ -103,6 +103,7 @@ async function _show(model, pos_x) {
     live2dSprite.scale.set(0.5, 0.5);
     live2dSprite.x=pos_x
     live2dSprite._autoInteract = false
+    live2dSprite.motion("Motion",0)
     let motions = live2dSprite.internalModel.motionManager.definitions["Motion"]
     let motions_list = {}
     for(let i=0;i<motions.length;i++){
