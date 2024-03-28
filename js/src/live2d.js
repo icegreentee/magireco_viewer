@@ -51,7 +51,6 @@ async function _show(model, pos_x) {
     const settings = new PIXI.live2d.Cubism4ModelSettings(model);
     const live2dSprite = await PIXI.live2d.Live2DModel.from(settings);
     app.stage.addChild(live2dSprite);
-//    console.log(app.stage.children)
     var playing = false;
     let audioCtx = new AudioContext();
     // 新建分析仪
@@ -64,10 +63,7 @@ async function _show(model, pos_x) {
     live2dSprite.scale.set(0.5, 0.5);
     live2dSprite.x=pos_x
     live2dSprite._autoInteract = false
-    live2dSprite.on
-    ("hit",function(){
-        console.log("hit")
-    play_sound()})
+    live2dSprite.on("hit",play_sound)
     live2dSprite.internalModel.on('afterMotionUpdate', run)
     live2dSprite.motion("Motion",0)
     // live2d动作和表情映射列表
@@ -114,15 +110,20 @@ async function _show(model, pos_x) {
         motion_list = []
         let cus_id = customs[custom_index]
         let jsonfile ="image/scenario/json/general/"
+        let group_start_i = 16
         if("motion" in chara_data[fav_char_id]["live2d"][cus_id]){
             jsonfile += cus_id+".json"
+            group_start_i =  chara_data[fav_char_id]["live2d"][cus_id]["motion"]
         }
         else{
             jsonfile += cus_id.slice(0,4)+"00.json"
+            group_start_i = chara_data[fav_char_id]["live2d"][cus_id.slice(0,4)+"00"]["motion"]
         }
+        random_group = "group_"+getRandomInt(parseInt(group_start_i),parseInt(group_start_i)+17)
+        console.log(random_group)
         fetchLocal(jsonfile).then(r => r.json(), alert).then(list => {
             group_dic=list["story"];
-            group = group_dic["group_16"];
+            group = group_dic[random_group];
             for(let i=0;i<group.length;i++){
                 let dic={}
                 let sleep_time = group[i]["autoTurnFirst"]*1000
