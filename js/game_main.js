@@ -164,9 +164,9 @@ function show_live2d(){
         lastChild.destroy();
     }
     if(is_show_fav2=="y"){
-        show("./image/image_native/live2d_v4/"+customs[custom_index]+"/", "model.model3.json", 0,function(model) {
+        show("./image/image_native/live2d_v4/"+customs[custom_index]+"/", "model.model3.json", -100,function(model) {
             });
-        show("./image/image_native/live2d_v4/"+customs2[custom2_index]+"/", "model.model3.json", 600,function(model) {
+        show("./image/image_native/live2d_v4/"+customs2[custom2_index]+"/", "model.model3.json", 700,function(model) {
             });
     }
     else{

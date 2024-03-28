@@ -59,11 +59,13 @@ async function _show(model, pos_x) {
     let frequencyData = new Uint8Array(analyser.frequencyBinCount);
     let request = new XMLHttpRequest();
     let source = audioCtx.createBufferSource();
-
+    console.log(live2dSprite)
     live2dSprite.scale.set(0.5, 0.5);
     live2dSprite.x=pos_x
     live2dSprite._autoInteract = false
-    live2dSprite.on("hit",play_sound)
+//    live2dSprite.on("hit",play_sound)
+    live2dSprite.on("click",play_sound)
+    live2dSprite.on("touchend",play_sound)
     live2dSprite.internalModel.on('afterMotionUpdate', run)
     live2dSprite.motion("Motion",0)
     // live2d动作和表情映射列表
@@ -89,6 +91,7 @@ async function _show(model, pos_x) {
     // 播放声音
     var delay_play = null
     function play_sound(){
+    console.log("play")
         if(playing||delay_play){
             stop_motion()
             clearTimeout(delay_play)

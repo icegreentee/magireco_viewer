@@ -36,6 +36,9 @@ def download_files(download_path, save_path):
 
 def download_files_list(file, file_list, download_bath, save_bath):
     if len(file_list) > 1 or file_list[0]['url'] != file:
+        directory, _ = os.path.split(save_bath + file)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
         with open(save_bath + file, 'wb') as fout:
             for part in file_list:
                 download_files(download_bath + part['url'], save_bath + part['url'])
@@ -164,9 +167,11 @@ def get_all_live2d():
     for live2d_dir in dl:
         char_id = live2d_dir[0:-2]
         with open(Live2d_PATH + live2d_dir + "/params.json", "r", encoding="utf-8") as f:
-            charaname = json.load(f)["charaName"].strip().replace('(圧縮)', '').replace('（圧縮）', '').replace('_圧縮',
-                                                                                                              '').strip(
+            charaname = json.load(f)["charaName"].strip().replace('(圧縮)', '').replace('（圧縮）', '').replace(
+                '_圧縮',
+                '').strip(
                 '_圧縮').replace(' ', '')
+
         dic = {"name": charaname}
         if os.path.isfile(download_base_dir + "scenario/json/general/" + live2d_dir + ".json"):
             with open(download_base_dir + "scenario/json/general/" + live2d_dir + ".json", 'r', encoding="utf-8") as file:
@@ -301,5 +306,4 @@ def main():
 
 # main()
 gen_chara_json()
-
 
