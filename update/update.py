@@ -13,7 +13,11 @@ MOVIE_H_JSON = "asset_movie_high.json"
 MOVIE_L_JSON = "asset_movie_low.json"
 VOICE_JSON = "asset_voice.json"
 FULLVOICE_JSON = "asset_fullvoice.json"
-
+# live2d中无需下载的
+black_live2d = [101799, 100203, 100302, 100505, 101002, 101102, 101504, 104303
+    , 200302, 300202, 300302, 300502, 300703, 300704, 300802, 301102, 301202,
+                301302, 301402, 301502, 301603, 301902, 302302, 302402, 303402,
+                303503, 303602, 305202, 305402, 305902, 400103, 400203, 401102, 401104]
 
 def download_files(download_path, save_path):
     retry = 3  # 重试次数
@@ -72,7 +76,8 @@ def eval_assets():
         if download_dir[0] in data_path and not os.path.isfile(download_base_dir + data_path):
             card_data_list.append([data_path, i["file_list"]])
         elif download_dir[1] in data_path and not os.path.isfile(download_base_dir + data_path) and int(
-                (download_base_dir + data_path).split("/")[4]) < 600000:
+                (download_base_dir + data_path).split("/")[4]) < 600000 and int(
+                (download_base_dir + data_path).split("/")[4]) not in black_live2d:
             live2d_data_list.append([data_path, i["file_list"]])
         elif download_dir[2] in data_path:
             if re.match("mini_\d\d\d\d00_r0.png", data_path.split("/")[3]) or re.match("mini_\d\d\d\d00_r0.plist",
@@ -162,9 +167,17 @@ def get_all_live2d():
             charaname = json.load(f)["charaName"].strip().replace('(圧縮)', '').replace('（圧縮）', '').replace('_圧縮',
                                                                                                               '').strip(
                 '_圧縮').replace(' ', '')
-        dic={"name":charaname}
-        if os.path.isfile(download_base_dir + "scenario/json/general/"+live2d_dir+".json"):
-            dic["motion"]="y"
+        dic = {"name": charaname}
+        if os.path.isfile(download_base_dir + "scenario/json/general/" + live2d_dir + ".json"):
+            with open(download_base_dir + "scenario/json/general/" + live2d_dir + ".json", 'r', encoding="utf-8") as file:
+                data = json.load(file)["story"]
+                for i in data:
+                    group_ctx = data[i]
+                    for ctx in group_ctx:
+                        if "chara" in ctx and "voice" in ctx["chara"][0]:
+                            voice_id = int(ctx["chara"][0]["voice"].split("_")[-1])
+                            if voice_id==24:
+                                dic["motion"] = i.split("_")[1]
         if char_id not in chars:
             chars[char_id] = {live2d_dir: dic}
         else:
@@ -286,4 +299,7 @@ def main():
         print("背景无需更新")
 
 
-main()
+# main()
+gen_chara_json()
+
+

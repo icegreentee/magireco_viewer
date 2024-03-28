@@ -41,45 +41,76 @@ function init(x, y) {
     PIXI.live2d.Live2DModel.registerTicker(PIXI.Ticker)
     app = new PIXI.Application(option);
 }
-
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 async function _show(model, pos_x) {
     const settings = new PIXI.live2d.Cubism4ModelSettings(model);
     const live2dSprite = await PIXI.live2d.Live2DModel.from(settings);
     app.stage.addChild(live2dSprite);
+    var playing = false;
+    let audioCtx = new AudioContext();
+    // 新建分析仪
+    let analyser = audioCtx.createAnalyser();
+    // 根据 频率分辨率建立个 Uint8Array 数组备用
+    let frequencyData = new Uint8Array(analyser.frequencyBinCount);
+    let request = new XMLHttpRequest();
+    let source = audioCtx.createBufferSource();
+
     live2dSprite.scale.set(0.5, 0.5);
     live2dSprite.x=pos_x
     live2dSprite._autoInteract = false
+    live2dSprite.on("hit",play_sound)
+    live2dSprite.internalModel.on('afterMotionUpdate', run)
     live2dSprite.motion("Motion",0)
-    let motions = live2dSprite.internalModel.motionManager.definitions["Motion"]
+    console.log(123456)
+    // live2d动作和表情映射列表
     let motions_list = {}
-    for(let i=0;i<motions.length;i++){
-        motions_list[parseInt(motions[i]["Name"].split("_")[1])] = i
-    }
-    let exp = live2dSprite.internalModel.motionManager.expressionManager.definitions
     let exp_list = {}
-    for(let i=0;i<exp.length;i++){
-        exp_list[exp[i]["Name"].slice(0,14)+exp[i]["Name"].slice(15)] = i
+    init_motions_and_exp()
+    // 当前live2d对应的所有动画组
+    let groups_dic = {}
+    // 要运行的动画
+    var motion_list = []
+
+    function init_motions_and_exp(){
+        let motions = live2dSprite.internalModel.motionManager.definitions["Motion"]
+        for(let i=0;i<motions.length;i++){
+            motions_list[parseInt(motions[i]["Name"].split("_")[1])] = i
+        }
+        let exp = live2dSprite.internalModel.motionManager.expressionManager.definitions
+        for(let i=0;i<exp.length;i++){
+            exp_list[exp[i]["Name"].slice(0,14)+exp[i]["Name"].slice(15)] = i
+        }
     }
+//    play_sound()
+    // 播放声音
     var delay_play = null
-    live2dSprite.on("hit",function(){
-        if(playing){
+    function play_sound(){
+        console.log(playing)
+        if(playing||delay_play){
+            console.log("playing")
             stop_motion()
             clearTimeout(delay_play)
+            delay_play=null
             delay_play= setTimeout(function(){
                 playing=true
                 get_motion_list();
-//                run_motion();
+                clearTimeout(delay_play)
+                delay_play=null
             },400)
         }else{
+            console.log("no playing")
             playing=true
             get_motion_list();
-//            console.log(motion_list)
-//            run_motion();
         }
-    })
-    var motion_list = []
-    function get_motion_list(){
+    }
+
+
+    function get_motion_list(group_index){
         motion_list = []
         let cus_id = customs[custom_index]
         let jsonfile ="image/scenario/json/general/"
@@ -91,7 +122,7 @@ async function _show(model, pos_x) {
         }
         fetchLocal(jsonfile).then(r => r.json(), alert).then(list => {
             group_dic=list["story"];
-            group = group_dic["group_25"];
+            group = group_dic["group_16"];
             for(let i=0;i<group.length;i++){
                 let dic={}
                 let sleep_time = group[i]["autoTurnFirst"]*1000
@@ -112,17 +143,17 @@ async function _show(model, pos_x) {
         })
     }
     var motion_task = null
-    function run_motion(){
+    async function run_motion(){
         if(motion_list.length==0){
             return;
         }
         let motion = motion_list.shift()
+        if("voice" in motion){
+            await loadSound(motion["voice"])
+        }
         if("motion" in motion){
             live2dSprite.internalModel.motionManager.stopAllMotions()
             live2dSprite.motion("Motion",motion["motion"])
-        }
-        if("voice" in motion){
-            loadSound(motion["voice"])
         }
         if("face" in motion){
             live2dSprite.expression(motion["face"])
@@ -144,55 +175,62 @@ async function _show(model, pos_x) {
             setMouthOpenY((arrayAdd(arr)/arr.length - 20)/60);
             setTimeout(run,1000/30);
     }
-    live2dSprite.internalModel.on('afterMotionUpdate', function() {
-        run()
-    })
     function stop_motion(){
         playing =false
         source.stop()
         clearTimeout(motion_task)
         live2dSprite.internalModel.motionManager.stopAllMotions()
     }
-    var playing = false;
-    let audioCtx = new AudioContext();
-    // 新建分析仪
-    let analyser = audioCtx.createAnalyser();
-    // 根据 频率分辨率建立个 Uint8Array 数组备用
-    let frequencyData = new Uint8Array(analyser.frequencyBinCount);
-    let request = new XMLHttpRequest();
-    let source = audioCtx.createBufferSource();
-    function loadSound(v){
+
+    async function loadSound(v){
         document.addEventListener('click', stop_motion);
         audioCtx = new AudioContext();
         // 新建分析仪
         analyser = audioCtx.createAnalyser();
         // 根据 频率分辨率建立个 Uint8Array 数组备用
         frequencyData = new Uint8Array(analyser.frequencyBinCount);
-        request = new XMLHttpRequest();
-        source = audioCtx.createBufferSource();
-        request.open('GET', 'image/sound_native/voice/'+v, true);
-        request.responseType = 'arraybuffer';
-        request.onload = ()=>{
-            const audioData = request.response;
-            audioCtx.decodeAudioData(audioData, function(buffer) {
-                // 新建 Buffer 源
-                source.buffer = buffer;
-                // 连接到 audioCtx
-                source.connect(audioCtx.destination);
-                // 连接到 音频分析器
-                source.connect(analyser);
-                // 开始播放
-                source.start(0);
-                source.onended = ()=>{
-                    // 停止播放
-                    playing = false;
-                    source.disconnect();
-                    source=null;
-                    document.removeEventListener('click', stop_motion);
-                }
-            });
-        };
-        request.send();
+        await loadAudioBuffer('image/sound_native/voice/' + v).then((buffer) => {
+            // 新建 Buffer 源
+            source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+            // 连接到 audioCtx
+            source.connect(audioCtx.destination);
+            // 连接到 音频分析器
+            source.connect(analyser);
+
+            source.start(0);
+
+            source.onended = () => {
+                // 停止播放
+                playing = false;
+                source.disconnect();
+//                console.log(source)
+                source = null;
+                document.removeEventListener('click', stop_motion);
+            };
+        })
+    }
+    function loadAudioBuffer(url) {
+        return new Promise((resolve, reject) => {
+            const request = new XMLHttpRequest();
+            request.open('GET', url, true);
+            request.responseType = 'arraybuffer';
+
+            request.onload = () => {
+                const audioData = request.response;
+                audioCtx.decodeAudioData(audioData, (buffer) => {
+                    resolve(buffer);
+                }, (error) => {
+                    reject(error);
+                });
+            };
+
+            request.onerror = () => {
+                reject(new Error('Failed to load audio file.'));
+            };
+
+            request.send();
+        });
     }
     function getByteFrequencyData(){
         analyser.getByteFrequencyData(frequencyData);

@@ -83,6 +83,7 @@ $("#favorite_set").on("click",function(){
 		localStorage.fav_char_id = fav_char_id
 		fav_char_rank=current_chara_rank
 		localStorage.fav_char_rank=fav_char_rank
+		localStorage.custom_index=0
 		loadLive2d()
 	}
 })
@@ -91,6 +92,7 @@ $("#favorite2_set").on("click",function(){
 		$("#favorite2_set").attr("src","./image/image_web/page/chara/conf_leader_on.png");
 		fav2_char_id=current_chara
 		localStorage.fav2_char_id = fav2_char_id
+		localStorage.custom2_index=0
 //		fav_char_rank=current_chara_rank
 		loadLive2d()
 	}
