@@ -1,0 +1,35 @@
+import json
+import os
+
+def get_filenames():
+    filenames = []
+    for root, dirs, files in os.walk("../image/scenario/json/general"):
+        for file in files:
+            filenames.append(file)
+    print(filenames)
+
+
+# 1-2 自我介绍
+# 3-12剧情
+# 13-23养成
+# 24-41主页
+# 24-32登录
+# 33-41点击
+#42-46战斗
+# get_filenames()
+f_l=['100100.json', '100103.json', '100104.json', '100150.json', '100153.json', '100200.json', '100202.json', '100250.json', '100251.json', '100300.json', '100303.json', '100350.json', '100351.json', '100352.json', '100354.json', '100400.json', '100402.json', '100451.json', '100452.json', '100500.json', '100502.json', '100503.json', '100550.json', '100552.json', '100600.json', '100650.json', '100651.json', '100700.json', '100750.json', '100800.json', '100850.json', '100851.json', '100900.json', '100950.json', '100951.json', '101000.json', '101051.json', '101100.json', '101150.json', '101152.json', '101200.json', '101250.json', '101300.json', '101400.json', '101450.json', '101500.json', '101550.json', '101551.json', '101600.json', '101651.json', '101700.json', '101701.json', '101750.json', '101751.json', '101799.json', '101800.json', '101850.json', '101900.json', '101951.json', '102000.json', '102100.json', '102105.json', '102106.json', '102200.json', '102202.json', '102203.json', '102250.json', '102300.json', '102303.json', '102350.json', '102400.json', '102402.json', '102403.json', '102500.json', '102502.json', '102551.json', '102600.json', '102602.json', '102650.json', '102651.json', '102700.json', '102702.json', '102750.json', '102751.json', '102800.json', '102850.json', '102900.json', '102950.json', '103000.json', '103050.json', '103100.json', '103150.json', '103200.json', '103250.json', '103300.json', '103350.json', '103400.json', '103450.json', '103500.json', '103550.json', '103600.json', '103650.json', '103700.json', '103800.json', '103900.json', '103902.json', '103903.json', '103950.json', '103951.json', '104000.json', '104050.json', '104051.json', '104100.json', '104200.json', '104201.json', '104202.json', '104203.json', '104204.json', '104300.json', '104400.json', '104500.json', '104600.json', '104700.json', '104800.json', '104900.json', '105000.json', '105100.json', '105200.json', '105300.json', '105302.json', '110100.json', '110200.json', '110201.json', '110202.json', '110300.json', '110400.json', '110401.json', '110500.json', '110600.json', '110700.json', '110701.json', '110702.json', '110800.json', '110900.json', '111000.json', '111200.json', '111201.json', '111202.json', '111300.json', '111600.json', '111700.json', '111800.json', '111801.json', '111802.json', '112000.json', '112100.json', '112101.json', '112102.json', '112500.json', '113300.json', '113700.json', '113701.json', '113702.json', '113900.json', '113902.json', '114300.json', '114400.json', '120100.json', '120150.json', '120151.json', '120152.json', '120200.json', '120300.json', '120301.json', '120302.json', '120900.json', '120901.json', '120902.json', '121000.json', '121003.json', '121004.json', '121600.json', '121700.json', '130100.json', '130101.json', '130102.json', '130200.json', '130300.json', '130900.json', '140100.json', '140101.json', '140102.json', '140200.json', '150100.json', '150200.json', '160100.json', '170100.json', '200100.json', '200151.json', '200152.json', '200200.json', '200300.json', '200350.json', '200352.json', '200400.json', '200451.json', '200452.json', '200500.json', '200550.json', '200551.json', '200553.json', '200600.json', '200602.json', '200650.json', '200651.json', '200653.json', '200700.json', '200750.json', '200751.json', '200900.json', '210000.json', '210100.json', '210200.json', '210250.json', '210251.json', '210252.json', '210300.json', '210400.json', '210401.json', '210402.json', '210500.json', '210600.json', '220100.json', '220200.json', '220300.json', '220350.json', '230000.json', '230100.json', '240000.json', '240100.json', '240200.json', '250000.json', '250001.json', '250100.json', '250200.json', '250300.json', '260000.json', '260100.json', '260200.json', '270000.json', '270100.json', '300100.json', '300200.json', '300250.json', '300251.json', '300300.json', '300351.json', '300400.json', '300500.json', '300600.json', '300651.json', '300700.json', '300750.json', '300800.json', '300850.json', '300900.json', '301000.json', '301051.json', '301100.json', '301150.json', '301151.json', '301200.json', '301300.json', '301400.json', '301500.json', '301550.json', '301600.json', '301650.json', '301700.json', '301800.json', '301900.json', '301950.json', '302000.json', '302100.json', '302200.json', '302300.json', '302400.json', '302500.json', '302551.json', '302600.json', '302700.json', '302800.json', '302850.json', '302900.json', '302950.json', '303000.json', '303051.json', '303100.json', '303200.json', '303250.json', '303300.json', '303350.json', '303400.json', '303500.json', '303551.json', '303600.json', '303700.json', '303751.json', '303800.json', '303900.json', '304000.json', '304100.json', '304200.json', '304300.json', '304400.json', '304500.json', '304600.json', '304650.json', '304651.json', '304700.json', '304750.json', '304800.json', '304900.json', '304950.json', '305000.json', '305100.json', '305200.json', '305251.json', '305300.json', '305350.json', '305400.json', '305500.json', '305600.json', '305700.json', '305701.json', '305800.json', '305850.json', '305900.json', '305950.json', '350100.json', '350101.json', '350102.json', '350200.json', '350300.json', '350301.json', '350302.json', '350303.json', '350400.json', '350401.json', '350402.json', '350500.json', '350501.json', '350502.json', '350503.json', '390000.json', '400100.json', '400200.json', '400300.json', '400400.json', '401100.json', '401200.json', '401300.json', '401400.json', '402100.json', '402150.json', '402200.json', '402250.json', '402300.json', '402350.json', '402400.json', '402450.json', '402451.json', '402500.json', '402600.json', '402650.json', '402700.json', '402800.json', '402900.json', '403100.json', '403200.json', '403300.json', '403400.json', '403500.json', '403600.json', '404100.json', '404200.json', '404300.json', '404400.json', '404500.json', '404600.json', '405100.json', '405200.json', '405300.json', '406100.json', '406200.json', '412100.json', '412103.json', '412200.json', 'xxxx.json']
+for i2 in f_l:
+    with open("../image/scenario/json/general/"+i2, 'r', encoding="utf-8") as file:
+        data = json.load(file)["story"]
+        dic={"page":[],"tap":[]}
+        for i in data:
+            group_ctx=data[i]
+            for ctx in group_ctx:
+                if "voice" in ctx["chara"][0]:
+                    voice_id=int(ctx["chara"][0]["voice"].split("_")[-1])
+                    if 24<=voice_id<=32:
+                        dic["page"].append(i)
+                    elif 33<=voice_id<=41:
+                        dic["tap"].append(i)
+                    break
+    print(i2,dic)
