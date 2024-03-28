@@ -27,7 +27,7 @@ function getModel(path, model,  pos_x,callback, callback2) {
     }, alert)
 }
 // Pixi option
-let app;
+var app;
 function init(x, y) {
     const option = {
         width: x,
@@ -51,6 +51,7 @@ async function _show(model, pos_x) {
     const settings = new PIXI.live2d.Cubism4ModelSettings(model);
     const live2dSprite = await PIXI.live2d.Live2DModel.from(settings);
     app.stage.addChild(live2dSprite);
+//    console.log(app.stage.children)
     var playing = false;
     let audioCtx = new AudioContext();
     // 新建分析仪
@@ -63,10 +64,12 @@ async function _show(model, pos_x) {
     live2dSprite.scale.set(0.5, 0.5);
     live2dSprite.x=pos_x
     live2dSprite._autoInteract = false
-    live2dSprite.on("hit",play_sound)
+    live2dSprite.on
+    ("hit",function(){
+        console.log("hit")
+    play_sound()})
     live2dSprite.internalModel.on('afterMotionUpdate', run)
     live2dSprite.motion("Motion",0)
-    console.log(123456)
     // live2d动作和表情映射列表
     let motions_list = {}
     let exp_list = {}
@@ -90,9 +93,7 @@ async function _show(model, pos_x) {
     // 播放声音
     var delay_play = null
     function play_sound(){
-        console.log(playing)
         if(playing||delay_play){
-            console.log("playing")
             stop_motion()
             clearTimeout(delay_play)
             delay_play=null
@@ -103,7 +104,6 @@ async function _show(model, pos_x) {
                 delay_play=null
             },400)
         }else{
-            console.log("no playing")
             playing=true
             get_motion_list();
         }

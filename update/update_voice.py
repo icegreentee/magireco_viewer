@@ -52,7 +52,7 @@ def get_all_char_list():
         data = json.load(file)
     char_list = []
     for i in data:
-        if int(i)>=4004:
+        if int(i)>=4011:
             txt= urllib.parse.quote(data[i]["cn"], safe='/:?&=')
             char_list.append("https://magireco.moe/wiki/"+txt)
     # print(char_list)

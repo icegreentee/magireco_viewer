@@ -41,7 +41,7 @@ var chara_data={}
 var bg_data={}
 $(document).ready(function(){
     adjust_page();
-	loadLive2d();
+	initLive2d();
 });
 
 $(window).resize( function  () {
@@ -94,15 +94,14 @@ function adjust_page(){
 	}
 	last_canvas_data={"w":current_w,"h":current_h}
 }
-
-function loadLive2d(){
-	init(2280,1520);
-	//获取服装目录
+function initLive2d(){
+    init(2280,1520);
+    //获取服装目录
 	fetchLocal("./update/chara_data.json").then(r => r.json(), alert)
 	.then(list => {
 	    chara_data=list
-	    customs = Object.keys(list[fav_char_id]["live2d"])
-	    customs2 = Object.keys(list[fav2_char_id]["live2d"])
+	    customs = Object.keys(chara_data[fav_char_id]["live2d"])
+	    customs2 = Object.keys(chara_data[fav2_char_id]["live2d"])
 //	    let lastChild = null;
         custom_index =0
 		custom2_index =0
@@ -129,9 +128,41 @@ function loadLive2d(){
         })
 	});
 }
+
+function loadLive2d(){
+	//获取服装目录
+	    customs = Object.keys(chara_data[fav_char_id]["live2d"])
+	    customs2 = Object.keys(chara_data[fav2_char_id]["live2d"])
+//	    let lastChild = null;
+        custom_index =0
+		custom2_index =0
+        if(localStorage.custom_index){
+            custom_index= parseInt(localStorage.custom_index)
+        }
+        if(localStorage.custom2_index){
+            custom2_index=parseInt(localStorage.custom2_index)
+        }
+//	    show_live2d()
+        $("#change_custom").unbind("click")
+        $("#change_custom").click(function(){
+            custom_index+=1
+            custom_index=custom_index%customs.length
+            localStorage.custom_index = custom_index
+            show_live2d()
+        })
+        $("#change_custom2").unbind("click")
+        $("#change_custom2").click(function(){
+            custom2_index+=1
+            custom2_index=custom2_index%customs2.length
+            localStorage.custom2_index = custom2_index
+            show_live2d()
+        })
+}
 function show_live2d(){
     let lastChild = null;
-    while (lastChild = app.stage.children.shift()) { lastChild.destroy(); }
+    while (lastChild = app.stage.children.shift()) {
+        lastChild.destroy();
+    }
     if(is_show_fav2=="y"){
         show("./image/image_native/live2d_v4/"+customs[custom_index]+"/", "model.model3.json", 0,function(model) {
             });
