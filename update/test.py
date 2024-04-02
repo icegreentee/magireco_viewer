@@ -21,15 +21,13 @@ f_l=['100100.json', '100103.json', '100104.json', '100150.json', '100153.json', 
 for i2 in f_l:
     with open("../image/scenario/json/general/"+i2, 'r', encoding="utf-8") as file:
         data = json.load(file)["story"]
-        dic={"page":[],"tap":[]}
+        l = []
         for i in data:
             group_ctx=data[i]
             for ctx in group_ctx:
                 if "voice" in ctx["chara"][0]:
                     voice_id=int(ctx["chara"][0]["voice"].split("_")[-1])
-                    if 24<=voice_id<=32:
-                        dic["page"].append(i)
-                    elif 33<=voice_id<=41:
-                        dic["tap"].append(i)
+                    l.append([voice_id,i])
                     break
-    print(i2,dic)
+    print(i2,sorted(l,key=lambda x:x[0]))
+    # print()
