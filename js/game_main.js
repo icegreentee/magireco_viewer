@@ -26,6 +26,7 @@ if(localStorage.fav_char_rank){
 }
 let customs=[]
 let custom_index =0
+let char_group = null
 //¸±½ÇÉ«
 let customs2=[]
 let custom2_index =0
@@ -139,14 +140,26 @@ function show_live2d(){
         lastChild.destroy();
     }
     if(is_show_fav2=="y"){
-        show("./image/image_native/live2d_v4/"+customs[custom_index]+"/", "model.model3.json", -100,function(model) {
-            });
-        show("./image/image_native/live2d_v4/"+customs2[custom2_index]+"/", "model.model3.json", 700,function(model) {
-            });
+        show("./image/image_native/live2d_v4/"+customs[custom_index]+"/", "model.model3.json", -100);
+        show("./image/image_native/live2d_v4/"+customs2[custom2_index]+"/", "model.model3.json", 700);
     }
     else{
-        show("./image/image_native/live2d_v4/"+customs[custom_index]+"/", "model.model3.json", 200, function(model) {
-            });
+        let cus_id = customs[custom_index]
+        let jsonfile ="image/scenario/json/general/"
+//        let group_start_i = 16
+        if("motion" in chara_data[fav_char_id]["live2d"][cus_id]){
+            jsonfile += cus_id+".json"
+//            group_start_i =  chara_data[fav_char_id]["live2d"][cus_id]["motion"]
+        }
+        else{
+            jsonfile += cus_id.slice(0,4)+"00.json"
+//            group_start_i = chara_data[fav_char_id]["live2d"][cus_id.slice(0,4)+"00"]["motion"]
+        }
+//        let random_group = "group_"+getRandomInt(parseInt(group_start_i),parseInt(group_start_i)+17)
+        fetchLocal(jsonfile).then(r => r.json(), alert).then(list => {
+            char_group = list["story"];
+            show("./image/image_native/live2d_v4/"+customs[custom_index]+"/", "model.model3.json", 200);
+        })
     }
 
 }

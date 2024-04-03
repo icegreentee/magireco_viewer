@@ -17,13 +17,12 @@ async function check_texture(base, data) {
     return data
 }
 // AJAX get
-function getModel(path, model,  pos_x,callback, callback2) {
+function getModel(path, model,  pos_x,callback) {
     return fetchLocal(path + model)
     .then(r => r.json(), alert)
     .then(data => check_texture(path, data), alert)
     .then(data => {
         callback(setpath(data, path + model), pos_x)
-        callback2(data.FileReferences)
     }, alert)
 }
 // Pixi option
@@ -90,45 +89,31 @@ async function _show(model, pos_x) {
     var delay_play = null
     function play_sound(){
         if(playing||delay_play){
+            console.log("stop_replay")
             stop_motion()
             clearTimeout(delay_play)
             delay_play=null
             delay_play= setTimeout(function(){
                 playing=true
-                get_motion_list();
+                add_motion()
                 clearTimeout(delay_play)
                 delay_play=null
             },400)
         }else{
+            console.log("play")
             playing=true
-            get_motion_list();
+            add_motion()
         }
     }
 
-
-    function get_motion_list(group_index){
+    function add_motion(){
         motion_list = []
-        let cus_id = customs[custom_index]
-        let jsonfile ="image/scenario/json/general/"
-        let group_start_i = 16
-        if("motion" in chara_data[fav_char_id]["live2d"][cus_id]){
-            jsonfile += cus_id+".json"
-            group_start_i =  chara_data[fav_char_id]["live2d"][cus_id]["motion"]
-        }
-        else{
-            jsonfile += cus_id.slice(0,4)+"00.json"
-            group_start_i = chara_data[fav_char_id]["live2d"][cus_id.slice(0,4)+"00"]["motion"]
-        }
-        random_group = "group_"+getRandomInt(parseInt(group_start_i),parseInt(group_start_i)+17)
-
-        fetchLocal(jsonfile).then(r => r.json(), alert).then(list => {
-            group_dic=list["story"];
-            group = group_dic[random_group];
-            for(let i=0;i<group.length;i++){
-                let dic={}
-                let sleep_time = group[i]["autoTurnFirst"]*1000
-                dic["time"] = sleep_time
-                let chara = group[i]["chara"][0]
+        let group = char_group["group_1"];
+        for(let i=0;i<group.length;i++){
+            let dic={}
+            let sleep_time = group[i]["autoTurnFirst"]*1000
+            dic["time"] = sleep_time
+            let chara = group[i]["chara"][0]
                 if("voice" in chara){
                     dic["voice"] = chara["voice"]+".mp3"
                 }
@@ -140,9 +125,10 @@ async function _show(model, pos_x) {
                 }
                 motion_list.push(dic)
             }
+            console.log("add_finish")
             run_motion();
-        })
     }
+
     var motion_task = null
     async function run_motion(){
         if(motion_list.length==0){
@@ -150,9 +136,12 @@ async function _show(model, pos_x) {
         }
         let motion = motion_list.shift()
         if("voice" in motion){
+            console.log("test_start")
             await loadSound(motion["voice"])
+            console.log("test_end")
         }
         if("motion" in motion){
+            console.log("start_motion")
             live2dSprite.internalModel.motionManager.stopAllMotions()
             live2dSprite.motion("Motion",motion["motion"])
         }
@@ -177,19 +166,22 @@ async function _show(model, pos_x) {
             setTimeout(run,1000/30);
     }
     function stop_motion(){
+        console.log("stop_motion")
         playing =false
-        source.stop()
-        clearTimeout(motion_task)
+        if(source){
+            source.stop()
+        }
         live2dSprite.internalModel.motionManager.stopAllMotions()
+        clearTimeout(motion_task)
     }
 
     async function loadSound(v){
-        document.addEventListener('click', stop_motion);
         audioCtx = new AudioContext();
         // 新建分析仪
         analyser = audioCtx.createAnalyser();
         // 根据 频率分辨率建立个 Uint8Array 数组备用
         frequencyData = new Uint8Array(analyser.frequencyBinCount);
+        console.log("start_load")
         await loadAudioBuffer('image/sound_native/voice/' + v).then((buffer) => {
             // 新建 Buffer 源
             source = audioCtx.createBufferSource();
@@ -200,7 +192,8 @@ async function _show(model, pos_x) {
             source.connect(analyser);
 
             source.start(0);
-
+            document.addEventListener('click', stop_motion);
+            console.log("loading")
             source.onended = () => {
                 // 停止播放
                 playing = false;
@@ -210,6 +203,7 @@ async function _show(model, pos_x) {
                 document.removeEventListener('click', stop_motion);
             };
         })
+        console.log("load_end")
     }
     function loadAudioBuffer(url) {
         return new Promise((resolve, reject) => {
@@ -242,4 +236,4 @@ async function _show(model, pos_x) {
 
 
 
-function show(path, model, pos_x,callback) {getModel(path, model,  pos_x,_show, callback); }
+function show(path, model, pos_x) {getModel(path, model,  pos_x,_show); }
