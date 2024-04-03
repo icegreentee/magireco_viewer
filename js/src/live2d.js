@@ -86,7 +86,6 @@ async function _show(model, pos_x) {
             exp_list[exp[i]["Name"].slice(0,14)+exp[i]["Name"].slice(15)] = i
         }
     }
-//    play_sound()
     // 播放声音
     var delay_play = null
     function play_sound(){

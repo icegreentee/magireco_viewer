@@ -100,32 +100,7 @@ function initLive2d(){
 	fetchLocal("./update/chara_data.json").then(r => r.json(), alert)
 	.then(list => {
 	    chara_data=list
-	    customs = Object.keys(chara_data[fav_char_id]["live2d"])
-	    customs2 = Object.keys(chara_data[fav2_char_id]["live2d"])
-//	    let lastChild = null;
-        custom_index =0
-		custom2_index =0
-        if(localStorage.custom_index){
-            custom_index= parseInt(localStorage.custom_index)
-        }
-        if(localStorage.custom2_index){
-            custom2_index=parseInt(localStorage.custom2_index)
-        }
-//	    show_live2d()
-        $("#change_custom").unbind("click")
-        $("#change_custom").click(function(){
-            custom_index+=1
-            custom_index=custom_index%customs.length
-            localStorage.custom_index = custom_index
-            show_live2d()
-        })
-        $("#change_custom2").unbind("click")
-        $("#change_custom2").click(function(){
-            custom2_index+=1
-            custom2_index=custom2_index%customs2.length
-            localStorage.custom2_index = custom2_index
-            show_live2d()
-        })
+	    loadLive2d()
 	});
 }
 
