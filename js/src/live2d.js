@@ -108,7 +108,8 @@ async function _show(model, pos_x) {
 
     function add_motion(){
         motion_list = []
-        let group = char_group["group_1"];
+        let random_group = "group_"+getRandomInt(parseInt(group_start_i),parseInt(group_start_i)+17)
+        let group = char_group[random_group];
         for(let i=0;i<group.length;i++){
             let dic={}
             let sleep_time = group[i]["autoTurnFirst"]*1000
