@@ -195,3 +195,33 @@ $("#filter_btn").click(function(){
     }
     $(".char_filter_black").hide()
 })
+
+$("#chara_live2d").click(function(){
+    chara_live2d_page()
+})
+
+$("#back_char").click(function(){
+    console.log("back_char")
+    $(".char").show()
+    $(".char_live2d").hide()
+    window.mini_res="./image/image_native/mini/anime_v2/mini_"+current_chara+"00_r.ExportJson"
+	window.mini_name="mini_"+current_chara+"00_r"
+	window.bg_res="./image/package/bg/web_common.ExportJson"
+	window.bg_name="web_common"
+	cc.loader.load([
+	                //chara_bg
+                    "./image/package/bg/web_common.ExportJson",
+                    "./image/package/bg/web_common_petal_00.plist",
+                    "./image/package/bg/web_common_petal_01.plist",
+                    "./image/package/bg/web_common_petal_02.plist",
+                    "./image/package/bg/web_common0.plist",
+                     //mini down
+                     "./image/package/web/web_ef_unit_marker/web_ef_unit_marker.ExportJson",
+                     "./image/package/web/web_ef_unit_marker/web_ef_unit_marker0.plist",
+				    "./image/image_native/mini/anime_v2/mini_"+current_chara+"00_r.ExportJson",
+				    "./image/image_native/mini/anime_v2/mini_"+current_chara+"00_r0.plist",
+				], function () {
+                    cc.director.runScene(new charaScene());
+                }, this);
+    $("#canvas").hide()
+})

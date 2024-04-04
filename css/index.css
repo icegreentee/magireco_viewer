@@ -57,7 +57,7 @@ background: yellow;
 .char{
 	display: none;
 }
-.setting, .bg_change{
+.setting, .bg_change,.char_live2d{
 	display: none;
 }
 
@@ -96,7 +96,8 @@ background: yellow;
             0 0.15rem
         );
 }
-.bg_change_img{
+
+.bg_change_img,.voice_img{
     border: 0.25rem solid transparent;
     border-image:url("../image/image_web/common/frame/common_frame.png") 20 20 stretch;
     background: #ffffff99;
@@ -107,10 +108,27 @@ background: yellow;
             0 0.19rem
         );
 }
-.bg_change_list{
-    width:100%;height:76%;position:absolute;left:0%;top:8%;
+.bg_change_list,.voice_list{
+    width:100%;height:90%;position:absolute;left:0%;top:8%;
     overflow-y: auto;overflow-x: hidden;display:flex;flex-direction:column;
     align-items:center;
+}
+.voice_btn{
+    width:90%;
+    height:0.8rem;
+    flex-shrink:0;
+    border:0.1rem solid #C6A882;
+    border-radius:0.2rem;
+    margin-bottom:0.15rem;
+}
+.voice_btn_2{
+    width:98%;
+    height:90%;
+    border:0.05rem solid white;
+    border-radius:0.1rem;
+    display:flex;
+    align-items:center;
+    background-color:#FCFAF5;
 }
 .bg_change_btn{
     width:90%;
@@ -128,6 +146,22 @@ background: yellow;
     display:flex;
     align-items:center;
     background-color:#FCFAF5;
+}
+.voice_btn_2_img{
+    height:70%;
+    margin-left:0.2rem;
+}
+.voice_btn_2_img2{
+    height:0.3rem;
+    position:absolute;
+    right:0.4rem;
+}
+.voice_btn_2_t{
+    height:70%;
+    font-size:0.3rem;
+    margin-top:0.1rem;
+    margin-left:0.08rem;
+    color:#864D16;
 }
 .bg_change_btn_2_img{
     height:70%;

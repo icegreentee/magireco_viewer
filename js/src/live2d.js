@@ -45,7 +45,7 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
+var play_sound;
 async function _show(model, pos_x) {
     const settings = new PIXI.live2d.Cubism4ModelSettings(model);
     const live2dSprite = await PIXI.live2d.Live2DModel.from(settings);
@@ -61,9 +61,27 @@ async function _show(model, pos_x) {
     live2dSprite.scale.set(0.5, 0.5);
     live2dSprite.x=pos_x
     live2dSprite._autoInteract = false
+    play_sound = function(set_group){
+        if(playing||delay_play){
+            console.log("stop_replay")
+            stop_motion()
+            clearTimeout(delay_play)
+            delay_play=null
+            delay_play= setTimeout(function(){
+                playing=true
+                add_motion(set_group)
+                clearTimeout(delay_play)
+                delay_play=null
+            },400)
+        }else{
+            console.log("play")
+            playing=true
+            add_motion(set_group)
+        }
+    }
 //    live2dSprite.on("hit",play_sound)
-    live2dSprite.on("click",play_sound)
-    live2dSprite.on("touchend",play_sound)
+    live2dSprite.on("click",()=>{play_sound()})
+    live2dSprite.on("touchend",()=>{play_sound()})
     live2dSprite.internalModel.on('afterMotionUpdate', run)
     live2dSprite.motion("Motion",0)
     // live2d动作和表情映射列表
@@ -87,29 +105,16 @@ async function _show(model, pos_x) {
     }
     // 播放声音
     var delay_play = null
-    function play_sound(){
-        if(playing||delay_play){
-            console.log("stop_replay")
-            stop_motion()
-            clearTimeout(delay_play)
-            delay_play=null
-            delay_play= setTimeout(function(){
-                playing=true
-                add_motion()
-                clearTimeout(delay_play)
-                delay_play=null
-            },400)
-        }else{
-            console.log("play")
-            playing=true
-            add_motion()
-        }
-    }
 
-    function add_motion(){
+    function add_motion(set_group){
         motion_list = []
-        let random_group = "group_"+getRandomInt(parseInt(group_start_i),parseInt(group_start_i)+17)
-        let group = char_group[random_group];
+        let group=null
+        if(set_group){
+            group = char_group[set_group];
+        }else{
+            let random_group = "group_"+getRandomInt(parseInt(group_start_i),parseInt(group_start_i)+17)
+            group = char_group[random_group];
+        }
         for(let i=0;i<group.length;i++){
             let dic={}
             let sleep_time = group[i]["autoTurnFirst"]*1000

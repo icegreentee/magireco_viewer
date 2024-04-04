@@ -191,7 +191,8 @@ function startScene(){
         fetchLocal("./update/bg_data.json").then(r => r.json(), alert)
         .then(list => {
             bg_data = list
-            main_page()
+//            main_page()
+            char_page()
         });
     };
     cc.game.run();

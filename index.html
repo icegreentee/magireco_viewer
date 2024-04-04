@@ -30,7 +30,7 @@
         <!--   main_page left-->
         <div style="width:1.3rem;margin-left:0.2rem;margin-top:0.1rem;position:absolute;left:0;top:0;z-index: 1;display: flex;flex-direction:column;align-items:center;">
             <img class="char setting" id="back_main" src="./image/image_web\common\global\global_back.png"
-                 style="width:90%;display: none;">
+                 style="width:1.2rem;display: none;">
             <div class="main" id="user_data" style="position:relative;margin-top:8%;margin-bottom:20%;">
                 <img id="chara_avater" src="./image/image_native\card\image\card_13095_f.png"
                      style="width:100%;position:relative;border-radius: 50%;">
@@ -97,6 +97,7 @@
         <!--    char_page left-->
         <div class="char" id="char_left" style="position:absolute;left: 0%;top:0%;width: 4.5rem;display: none;">
             <img src="./image/image_web\page\chara\bg_chara_data.png" style="width: 100%;">
+            <img id="chara_live2d" src="image/image_web/common/btn/btn_common_mini.png" style="width: 15%;position:absolute;top: 25%;right: 0%;">
             <img id="chara_attr" src="./image/image_web/common/chara/att_water_f.png"
                  style="width: 15%;position:absolute;top: 18%;left: 42.5%;">
             <p id="chara_name"
@@ -284,6 +285,28 @@
                  style="width: 100%;position:relative;">
             <img id="char_card_f" src="./image/image_native\card\frame\frame_water_rank_5.png"
                  style="width: 100%;position:absolute;left:0;">
+        </div>
+        <!--    char_page live2d-->
+        <div class="char_live2d">
+            <img id="back_char" src="./image/image_web\common\global\global_back.png"
+                 style="width:1.2rem;position:absolute;top:0;left:0;margin-left:0.25rem;margin-top:0.1rem;">
+            <img src="./image/image_web\page\mypage\btn_live2d_02.png"
+                 style="width:1rem;position:absolute;top:50%;left:0.1rem;"
+                 id="change_char_custom">
+            <div class="bg_change_img" style="width:5.7rem;height:80%;right:4%;top:10%;position:absolute;">
+                <img src="./image/image_web/common/frame/frame_title.png" class="frame_title"
+                     style="width:6.1rem;height:7%;margin:-0.19rem;">
+                <div class="bg_change_font">语音</div>
+                <div class="voice_list">
+                   <div class="voice_btn">
+                       <div class="voice_btn_2">
+                           <img class="voice_btn_2_img" src="./image/image_web/page/profile/icon_sound_data_on.png">
+                           <div class="voice_btn_2_t"  >自我介绍1</div>
+<!--                           <img class="voice_btn_2_img2" src="image/image_web/page/gacha/gacha_new.png">-->
+                       </div>
+                   </div>
+                </div>
+            </div>
         </div>
         <!--    setting_page-->
         <div class="setting setting_img" style="width:60%;height:80%;left:20%;top:10%;position:absolute;">

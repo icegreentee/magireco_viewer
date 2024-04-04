@@ -138,3 +138,118 @@ function char_left_load(){
 	}
 	$("#chara_rank"+current_chara_rank+"_select").show()
 }
+
+function chara_live2d_page(){
+    $(".char").hide()
+    $(".char_live2d").show()
+    // bg change
+    window.bg_res="image/image_native/bg/web/web_0015.ExportJson"
+	window.bg_name="web_0015"
+	cc.loader.load([
+	                //chara_bg
+                    "image/image_native/bg/web/web_0015.ExportJson",
+                    "image/image_native/bg/web/web_0015_ef_dust.plist",
+                    "image/image_native/bg/web/web_00150.plist",
+                    "image/image_native/bg/web/web_00150.png",
+				], function () {
+                    cc.director.runScene(new bgScene());
+                }, this);
+    //live2d
+    $("#canvas").show()
+    var char_custom_index = 0
+    var char_customs = []
+    load_char_live2d()
+}
+
+function add_voice_list(dic,dic2){
+    let voice_dic = {1:"自我介绍1",2:"自我介绍2",3:"剧情1",4:"剧情2",5:"剧情3",6:"剧情4",7:"剧情5",
+    8:"剧情6",9:"剧情7",10:"剧情8",11:"剧情9",12:"剧情10",
+    13:"强化完成",14:"强化（Lv最大时）",15:"短篇Lv UP",
+    16:"魔力解放1",17:"魔力解放2",18:"魔力解放3",19:"Magia Lv UP",
+    20:"魔法少女觉醒1",21:"魔法少女觉醒2",22:"魔法少女觉醒3",23:"魔法少女觉醒4",
+    24:"登录1",25:"登录2（早）",26:"登录3（昼）",27:"登录4（夜）",28:"登录5（深夜）",29:"登录6（其他）",
+    30:"登录7（AP满）",31:"登录8（BP满）",32:"登录9",33:"点击1",34:"点击2",35:"点击3",36:"点击4",
+    37:"点击5",38:"点击6",39:"点击7",40:"点击8",41:"点击9",
+    42:"Quest开始",43:"Quest胜利1",44:"Quest胜利2",45:"Quest胜利3",46:"Quest胜利4"}
+    $(".voice_list").empty()
+    for(let i in dic){
+        let t;
+        if(i in voice_dic){
+            t = voice_dic[i];
+        }
+        else{
+            t = "其他"+i;
+        }
+        $(".voice_list").append(gen_bg_btn(i,t,dic2[i]))
+        $("#voice_btn_"+i).on("click",function(){
+            console.log(dic[i])
+            play_sound(dic[i])
+        })
+    }
+}
+function gen_bg_btn(i,t,is_new){
+    let add_div="<div class='voice_btn' id='voice_btn_"+i+"'>"
+	add_div+="<div class='voice_btn_2'>"
+	add_div+="<img class='voice_btn_2_img' src='./image/image_web/page/profile/icon_sound_data_on.png'>"
+	add_div+="<div class='voice_btn_2_t'>"+t+"</div>"
+	if(is_new){
+	    add_div+="<img class='voice_btn_2_img2' src='image/image_web/page/gacha/gacha_new.png'>"
+	}
+	add_div+="</div>"
+	add_div+="</div>"
+	return add_div
+}
+
+function load_char_live2d(){
+	//获取服装目录
+	    char_customs = Object.keys(chara_data[current_chara]["live2d"])
+//	    let lastChild = null;
+        char_custom_index =0
+//	    show_live2d()
+        $("#change_char_custom").unbind("click")
+        $("#change_char_custom").click(function(){
+            char_custom_index+=1
+            char_custom_index=char_custom_index%char_customs.length
+            show_char_live2d()
+        })
+        show_char_live2d()
+}
+
+function show_char_live2d(){
+    let lastChild = null;
+    while (lastChild = app.stage.children.shift()) {
+        lastChild.destroy();
+    }
+    let cus_id = char_customs[char_custom_index]
+        let jsonfile ="image/scenario/json/general/"
+        if("motion" in chara_data[current_chara]["live2d"][cus_id]){
+            jsonfile += cus_id+".json"
+            group_start_i =  chara_data[current_chara]["live2d"][cus_id]["motion"]
+        }
+        else{
+            jsonfile += cus_id.slice(0,4)+"00.json"
+            group_start_i = chara_data[current_chara]["live2d"][cus_id.slice(0,4)+"00"]["motion"]
+        }
+        fetchLocal(jsonfile).then(r => r.json(), alert).then(list => {
+            char_group = list["story"];
+            eval_page_group()
+            show("./image/image_native/live2d_v4/"+char_customs[char_custom_index]+"/", "model.model3.json", 200);
+        })
+
+}
+
+function eval_page_group(){
+    let dic = {}
+    let dic2={}
+    for(let group_i in char_group){
+        let group_ctx = char_group[group_i]
+        for(let i =0;i<group_ctx.length;i++){
+            if("voice" in group_ctx[i]["chara"][0]){
+                dic[parseInt(group_ctx[i]["chara"][0]["voice"].split("_")[4])]=group_i
+                dic2[parseInt(group_ctx[i]["chara"][0]["voice"].split("_")[4])]=group_ctx[i]["chara"][0]["voice"].split("_")[3]!="00"
+                break
+            }
+        }
+    }
+    add_voice_list(dic,dic2)
+}
