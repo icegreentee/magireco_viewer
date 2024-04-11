@@ -66,13 +66,13 @@ download_dir = ["/card/image/",
 
 # 分析出需要下载的文件
 def eval_assets():
-    download_files(base_path + MAIN_JSON, "./download/" + MAIN_JSON)
+    download_files(base_path + MAIN_JSON, "../download/" + MAIN_JSON)
     card_data_list = []
     live2d_data_list = []
     mini_data_list = []
     bg_list = []
     json_general = []
-    data = read_json_file("./download/" +MAIN_JSON)
+    data = read_json_file("../download/" +MAIN_JSON)
     for i in data:
         data_path = i["path"]
         # print(data_path)
