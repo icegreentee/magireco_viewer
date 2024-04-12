@@ -32,7 +32,7 @@ def download_all(voice_list):
 def get_char_cn(download_path, save_path):
     if not os.path.isfile("../download/" + save_path + ".html"):
         download_files(download_path, "../download/" + save_path + ".html")
-    print("页面下载完毕")
+        print("页面下载完毕")
     with open("../download/" + save_path + ".html", 'r', encoding="utf-8") as f:
         html_str = f.read()
 
@@ -49,15 +49,18 @@ def get_char_cn(download_path, save_path):
     dic2 = []
     for i in data:
         dic2.append(i.getText().strip())
-    return dic,dic2
+    return dic, dic2
 
-def gen_zimu_dic(voice_list,zi_mu):
-    dic={}
+
+def gen_zimu_dic(voice_list, zi_mu, zimu_dic):
+    # dic={}
     for i in range(len(voice_list)):
         voice_info = voice_list[i].split("/")[-1].split(".")[0].lower()
-        if len(zi_mu[0])!=0:
-            dic[voice_info] = zi_mu[i]
-    return dic
+        if len(zi_mu[i]) != 0 and zi_mu[i]!="译文暂缺":
+            zimu_dic[voice_info] = zi_mu[i]
+            # print(voice_info,zi_mu[i])
+    # return dic
+
 
 def get_all_char_list():
     with open("chara_data.json", 'r', encoding="utf-8") as file:
@@ -71,13 +74,15 @@ def get_all_char_list():
             char_list2.append(data[i]["cn"])
     # print(char_list)
     # print(char_list2)
+    zimu_dic = {}
     for i in range(len(char_list)):
-        voice_list,zi_mu = get_char_cn(char_list[i], char_list2[i])
-        zimu_dic = gen_zimu_dic(voice_list,zi_mu)
-        print(zimu_dic)
-        break
-    #     download_all(voice_list)
+        voice_list, zi_mu = get_char_cn(char_list[i], char_list2[i])
+        gen_zimu_dic(voice_list, zi_mu, zimu_dic)
+        download_all(voice_list)
+    with open("./zimu_data.json", "w", encoding="utf-8") as f:
+        json.dump(zimu_dic, f, indent=4, ensure_ascii=False)
+        # print(len(zimu_dic.keys()))
+        # download_all(voice_list)
 
 
 get_all_char_list()
-
