@@ -51,13 +51,15 @@ def get_char_cn(download_path, save_path):
         dic2.append(i.getText().strip())
     return dic, dic2
 
+def add_br(text):
+    return text.replace('。', '。<br>')
 
 def gen_zimu_dic(voice_list, zi_mu, zimu_dic):
     # dic={}
     for i in range(len(voice_list)):
         voice_info = voice_list[i].split("/")[-1].split(".")[0].lower()
         if len(zi_mu[i]) != 0 and zi_mu[i]!="译文暂缺":
-            zimu_dic[voice_info] = zi_mu[i]
+            zimu_dic[voice_info] = add_br(zi_mu[i])
             # print(voice_info,zi_mu[i])
     # return dic
 

@@ -142,12 +142,10 @@ async function _show(model, pos_x) {
         }
         let motion = motion_list.shift()
         if("voice" in motion){
-            console.log("test_start")
+            console.log(motion["voice"])
             await loadSound(motion["voice"])
-            console.log("test_end")
         }
         if("motion" in motion){
-            console.log("start_motion")
             live2dSprite.internalModel.motionManager.stopAllMotions()
             live2dSprite.motion("Motion",motion["motion"])
         }
@@ -182,6 +180,13 @@ async function _show(model, pos_x) {
     }
 
     async function loadSound(v){
+        let v_name= v.split(".")[0]
+        if(v_name in zimu_data){
+            $(".zimu").html(zimu_data[v_name])
+        }
+        else{
+            $(".zimu").text("")
+        }
         audioCtx = new AudioContext();
         // 新建分析仪
         analyser = audioCtx.createAnalyser();
@@ -198,6 +203,7 @@ async function _show(model, pos_x) {
             source.connect(analyser);
 
             source.start(0);
+            $(".zimu").show()
             document.addEventListener('click', stop_motion);
             console.log("loading")
             source.onended = () => {
@@ -206,6 +212,7 @@ async function _show(model, pos_x) {
                 source.disconnect();
 //                console.log(source)
                 source = null;
+                $(".zimu").hide()
                 document.removeEventListener('click', stop_motion);
             };
         })

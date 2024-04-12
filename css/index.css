@@ -239,3 +239,18 @@ background: yellow;
 .chara_head_5{
 	position: absolute;left: 0.3rem;top:0.3rem;width: 1rem;height: 1rem;display: none;
 }
+
+.zimu{
+    display:none;
+    position:absolute;
+    text-align:center;
+    top:6.5rem;
+    left:3rem;
+    width:5.5rem;
+    font-size:0.3rem;
+    font-family:none;
+    font-weight:bold;
+    z-index:1;
+    color:#696769;
+    text-shadow:-0.01rem 0 white,0 0.01rem white,0.01rem 0 white,0 -0.01rem white;
+}
