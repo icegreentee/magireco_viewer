@@ -41,6 +41,7 @@ if(localStorage.is_show_fav2){
 }
 var chara_data={}
 var bg_data={}
+var zimu_data={}
 $(document).ready(function(){
     adjust_page();
 	initLive2d();
@@ -101,8 +102,12 @@ function initLive2d(){
     //获取服装目录
 	fetchLocal("./update/chara_data.json").then(r => r.json(), alert)
 	.then(list => {
-	    chara_data=list
-	    loadLive2d()
+	    chara_data=list;
+	    fetchLocal("./update/zimu_data.json").then(r => r.json(), alert)
+        .then(list2 => {
+            zimu_data=list2
+            loadLive2d()
+        });
 	});
 }
 
