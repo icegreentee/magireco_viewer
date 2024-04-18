@@ -180,14 +180,14 @@ function add_voice_list(dic,dic2){
         else{
             t = "其他"+i;
         }
-        $(".voice_list").append(gen_bg_btn(i,t,dic2[i]))
+        $(".voice_list").append(gen_voice_btn(i,t,dic2[i]))
         $("#voice_btn_"+i).on("click",function(){
             console.log(dic[i])
             play_sound(dic[i])
         })
     }
 }
-function gen_bg_btn(i,t,is_new){
+function gen_voice_btn(i,t,is_new){
     let add_div="<div class='voice_btn' id='voice_btn_"+i+"'>"
 	add_div+="<div class='voice_btn_2'>"
 	add_div+="<img class='voice_btn_2_img' src='./image/image_web/page/profile/icon_sound_data_on.png'>"
@@ -239,6 +239,7 @@ function show_char_live2d(){
 }
 
 function eval_page_group(){
+    console.log("eval_page_group")
     let dic = {}
     let dic2={}
     for(let group_i in char_group){
