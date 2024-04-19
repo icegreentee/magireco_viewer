@@ -57,7 +57,7 @@ background: yellow;
 .char{
 	display: none;
 }
-.setting, .bg_change,.char_live2d{
+.setting, .bg_change,.char_live2d,.global_quest_page{
 	display: none;
 }
 
@@ -108,7 +108,12 @@ background: yellow;
             0 0.19rem
         );
 }
-.bg_change_list,.voice_list{
+.bg_change_list{
+    width:100%;height:78%;position:absolute;left:0%;top:8%;
+    overflow-y: auto;overflow-x: hidden;display:flex;flex-direction:column;
+    align-items:center;
+}
+.voice_list{
     width:100%;height:90%;position:absolute;left:0%;top:8%;
     overflow-y: auto;overflow-x: hidden;display:flex;flex-direction:column;
     align-items:center;
