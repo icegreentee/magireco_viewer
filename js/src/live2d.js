@@ -246,7 +246,37 @@ async function _show(model, pos_x) {
     }
 }
 
+async function _show2(model, pos_x) {
+    const settings = new PIXI.live2d.Cubism4ModelSettings(model);
+    const live2dSprite = await PIXI.live2d.Live2DModel.from(settings);
+    app.stage.addChild(live2dSprite);
+    live2dSprite.scale.set(0.5, 0.5);
+    live2dSprite.x=pos_x
+    live2dSprite._autoInteract = false
+//    live2dSprite.motion("Motion",0)
+    // live2d动作和表情映射列表
+    let motions_list = {}
+    let exp_list = {}
+    init_motions_and_exp()
+    // 当前live2d对应的所有动画组
+    let groups_dic = {}
+    // 要运行的动画
+    var motion_list = []
 
+    function init_motions_and_exp(){
+        let motions = live2dSprite.internalModel.motionManager.definitions["Motion"]
+        for(let i=0;i<motions.length;i++){
+            motions_list[parseInt(motions[i]["Name"].split("_")[1])] = i
+        }
+        let exp = live2dSprite.internalModel.motionManager.expressionManager.definitions
+        for(let i=0;i<exp.length;i++){
+            exp_list[exp[i]["Name"].slice(0,14)+exp[i]["Name"].slice(15)] = i
+        }
+    }
+    live2dSprite.groups_dic=groups_dic
+    live2dSprite.motion_list=motion_list
+}
 
 
 function show(path, model, pos_x) {getModel(path, model,  pos_x,_show); }
+function show2(path, model, pos_x) {getModel(path, model,  pos_x,_show2); }

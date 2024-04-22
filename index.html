@@ -94,7 +94,7 @@
         </div>
         <!--    main_page live2d-->
         <div class="zimu"></div>
-        <canvas class="main" id="canvas" style="position:absolute;top:0;left:0;height:100%;"></canvas>
+        <canvas class="main" id="canvas" style="position:absolute;top:0;left:0;height:100%;z-index:3;"></canvas>
         <!--    char_page left-->
         <div class="char" id="char_left" style="position:absolute;left: 0%;top:0%;width: 4.5rem;display: none;">
             <img src="./image/image_web\page\chara\bg_chara_data.png" style="width: 100%;">
@@ -360,6 +360,49 @@
                      src="./image/image_web/page/chara/btn_pink.png">
                 <div class="bg_change_btn_font" id="change_bg_btn">确定</div>
             </div>
+        </div>
+        <!--    global_quest_page-->
+        <div class="global_quest_page">
+            <div class="bg_change_img" style="width:15%;height:80%;left:5%;top:10%;position:absolute;">
+<!--                <div class="quest_list">-->
+<!--                   <div class="quest_btn">-->
+<!--                       <div class="quest_btn_2">-->
+<!--                           <img class="quest_btn_2_img" src="./image/image_web/common/frame/title_icon.png">-->
+<!--                           <div class="quest_btn_2_t"  >第一章</div>-->
+<!--                           <img class="quest_btn_2_img2" src="image/image_web/page/quest/btn_list_close.png">-->
+<!--                       </div>-->
+<!--                   </div>-->
+<!--                </div>-->
+            </div>
+            <div class="bg_change_img" style="width:68%;height:80%;right:5%;top:10%;position:absolute;">
+                <img src="./image/image_web/common/frame/frame_title.png" class="frame_title"
+                     style="width:102.9%;height:7%;margin:-0.19rem;">
+                <div class="bg_change_font">剧情(测试)</div>
+                <div class="quest_list">
+                   <div class="quest_btn">
+                       <div class="quest_btn_2">
+                           <img class="quest_btn_2_img" src="./image/image_web/common/frame/title_icon.png">
+                           <div class="quest_btn_2_t"  >第一章</div>
+                           <img class="quest_btn_2_img2" src="image/image_web/page/quest/btn_list_close.png">
+                       </div>
+                       <div class="quest_btn_3">
+                           <div class="quest_btn_4" id="story_click">
+                               <div  class="quest_btn_5">
+                                    <div class="quest_btn_5_font">01</div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+        <!--  story   -->
+        <div class="story_page" style="position:absolute;top:0;width:100%;height:100%;background-color:#fff;z-index:2;">
+            <img id="story_bg" src="image/package/story/narration.png" style="width:100%;height:100%;">
+            <img id="story_log" src="image/package/story/story_ui_log_b.png" style="position:absolute;left:0.2rem;top:0;width:1rem;">
+            <img id="story_auto" src="image/package/story/story_ui_auto_b.png" style="position:absolute;left:0.2rem;top:1.3rem;width:1rem;">
+<!--            <img src="image/package/story/story_ui_pause_b_on.png" style="position:absolute;left:0.2rem;top:2.6rem;width:1rem;">-->
+            <img id="story_skip" src="image/package/story/story_ui_skip.png" style="position:absolute;right:0.2rem;top:0.2rem;height:0.6rem;">
         </div>
     </div>
 </div>

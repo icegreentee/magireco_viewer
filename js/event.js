@@ -225,3 +225,11 @@ $("#back_char").click(function(){
                 }, this);
     $("#canvas").hide()
 })
+
+$("#global_quest").click(function(){
+    global_quest_page()
+})
+
+$("#story_click").click(function(){
+    start_story()
+})

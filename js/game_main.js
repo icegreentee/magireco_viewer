@@ -198,6 +198,7 @@ function startScene(){
             bg_data = list
             main_page()
 //            char_page()
+            global_quest_page()
         });
     };
     cc.game.run();

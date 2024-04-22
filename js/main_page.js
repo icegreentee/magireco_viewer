@@ -3,6 +3,7 @@ function main_page(){
 	$(".char").hide()
 	$(".setting").hide()
 	$(".bg_change").hide()
+	$(".global_quest_page").hide()
 	$(".main").show()
 	if(is_show_fav2=="y"){
 	    $("#change_custom2").show()
@@ -72,4 +73,34 @@ function gen_bg_btn(i){
 	add_div+="</div>"
 	add_div+="</div>"
 	return add_div
+}
+
+function global_quest_page(){
+    $(".main").hide()
+    $("#back_main").show()
+    $(".global_quest_page").show()
+}
+
+function start_story(){
+    fetchLocal("image/scenario/json/adv/scenario_3/310011-1.json").then(r => r.json(), alert)
+	.then(list => {
+	    cc.director.popScene();
+        $(".global_quest_page").hide()
+        $(".story_page").show()
+        $("#canvas").show()
+        run_story(list["story"]["group_1"])
+	});
+}
+
+function run_story(story_list){
+    console.log(story_list)
+    show_story_live2d(100100,200)
+}
+
+function show_story_live2d(live2d_index,live2d_x){
+    let lastChild = null;
+    while (lastChild = app.stage.children.shift()) {
+        lastChild.destroy();
+    }
+    show2("./image/image_native/live2d_v4/"+live2d_index+"/", "model.model3.json", live2d_x);
 }
