@@ -1,0 +1,792 @@
+{
+    "story": {
+        "group_1": [
+            {
+                "bg": "bg_adv_11061.jpg",
+                "bgm": "bgm01_anime03",
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 100100,
+                        "motion": 0,
+                        "pos": 2
+                    }
+                ],
+                "nameRight": "伊吕波",
+                "textRight": "御魂小姐，你好",
+                "turnChangeIn": "fadeIn",
+                "turnChangeOut": "fadeOut"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101700,
+                        "motion": 0,
+                        "pos": 0
+                    }
+                ],
+                "nameLeft": "御魂",
+                "textLeft": "啊啦，小伊@欢迎"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_030.exp.json",
+                        "id": 100100,
+                        "motion": 200
+                    }
+                ],
+                "textRight": "悲叹之种…@就只有这些了…"
+            },
+            {
+                "chara": [
+                    {
+                        "id": 100100
+                    }
+                ],
+                "textRight": "能用这些…再尽可能@帮我强化吗？"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_011.exp.json",
+                        "id": 101700
+                    }
+                ],
+                "textLeft": "当然@很欢迎哦"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101700,
+                        "motion": 100
+                    }
+                ],
+                "textLeft": "那，请进手术室吧？"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 100100,
+                        "motion": 0
+                    }
+                ],
+                "textRight": "嗯"
+            },
+            {
+                "autoTurnLast": 0.01,
+                "bgm": "stop",
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101700,
+                        "motion": 0,
+                        "pos": 2
+                    },
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 0,
+                        "pos": 0
+                    }
+                ],
+                "turnChangeIn": "rollInFast"
+            },
+            {
+                "bgm": "bgm03_story09",
+                "nameLeft": "伊吕波",
+                "nameRight": "御魂",
+                "textRight": "那么，首先把衣服脱掉…",
+                "turnChangeOut": "rollOutFast"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 1,
+                        "face": "mtn_ex_030.exp.json",
+                        "id": 100100,
+                        "motion": 400
+                    }
+                ],
+                "textLeft": "那，那样的玩笑@请不要再开了…!"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "effect": "emotion_joy_0",
+                        "face": "mtn_ex_011.exp.json",
+                        "id": 101700,
+                        "motion": 300
+                    }
+                ],
+                "se": "7222_happy",
+                "textRight": "啊啦啦，真可惜"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 1,
+                        "face": "mtn_ex_030.exp.json",
+                        "id": 100100,
+                        "motion": 200
+                    }
+                ],
+                "textLeft": "呜…"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "id": 101700,
+                        "motion": 0
+                    }
+                ],
+                "textRight": "呼呼，抱歉抱歉@[chara:101700:lipSynch_0][wait:1.0][chara:101700:cheek_0][chara:101700:face_mtn_ex_010.exp.json][chara:101700:lipSynch_1]那么，调整下情绪…"
+            },
+            {
+                "bgm": "stop",
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101700
+                    }
+                ],
+                "textRight": "赶紧开始手术吧？"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 1,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 1
+                    }
+                ],
+                "textLeft": "嗯…！"
+            },
+            {
+                "autoTurnLast": 0.01,
+                "bgm": "stop",
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_030.exp.json",
+                        "id": 101700,
+                        "motion": 200,
+                        "pos": 2
+                    },
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_030.exp.json",
+                        "id": 100100,
+                        "motion": 0,
+                        "pos": 0
+                    }
+                ],
+                "turnChangeIn": "fadeIn"
+            },
+            {
+                "bgm": "bgm03_story06",
+                "chara": [
+                    {
+                        "id": 100100,
+                        "lipSynch": 0
+                    }
+                ],
+                "nameLeft": "伊吕波",
+                "nameRight": "御魂",
+                "textLeft": "（还是…@没能习惯…这种感觉…)",
+                "turnChangeOut": "fadeOut",
+                "turnEffect": "thinking"
+            },
+            {
+                "chara": [
+                    {
+                        "id": 100100,
+                        "lipSynch": 0,
+                        "motion": 301
+                    }
+                ],
+                "textLeft": "（身体深处有剧痛感…)"
+            },
+            {
+                "chara": [
+                    {
+                        "id": 100100,
+                        "lipSynch": 0
+                    },
+                    {
+                        "effect": "fadeout",
+                        "id": 101700
+                    }
+                ],
+                "textLeft": "（头脑之中…@浮现出了许多记忆中的脸庞…)"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 2,
+                        "face": "mtn_ex_060.exp.json",
+                        "id": 100100,
+                        "motion": 400,
+                        "mouthOpen": 1
+                    }
+                ],
+                "flashEffect": "flashWhite1",
+                "textLeft": "嗯，啊…!"
+            },
+            {
+                "bg": "black",
+                "bgm": "stop",
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101700,
+                        "motion": 0,
+                        "pos": 2
+                    }
+                ],
+                "nameRight": "御魂",
+                "textRight": "多味沙司肉饼",
+                "turnEffect": "stop"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 0
+                    },
+                    {
+                        "effect": "fadeout",
+                        "id": 101700
+                    }
+                ],
+                "textLeft": "诶？"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101700,
+                        "motion": 100,
+                        "pos": 2
+                    }
+                ],
+                "nameRight": "御魂",
+                "textRight": "还有，浓郁奶酪？"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 401
+                    },
+                    {
+                        "effect": "fadeout",
+                        "id": 101700
+                    }
+                ],
+                "textLeft": "诶…!"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101700,
+                        "motion": 300,
+                        "pos": 2
+                    }
+                ],
+                "nameRight": "御魂",
+                "textRight": "充满爱意的…@奶焗汉堡"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 0
+                    },
+                    {
+                        "effect": "fadeout",
+                        "id": 101700
+                    }
+                ],
+                "textLeft": "汉堡…"
+            },
+            {
+                "bg": "bg_adv_11061.jpg",
+                "bgChangeEffect": "fade",
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101700,
+                        "motion": 0,
+                        "pos": 2
+                    },
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 1
+                    }
+                ],
+                "nameLeft": "伊吕波",
+                "nameRight": "御魂",
+                "textLeft": "那个…@好像…!"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "effect": "emotion_surprise_0",
+                        "face": "mtn_ex_051.exp.json",
+                        "id": 101700
+                    }
+                ],
+                "se": "7226_shock",
+                "textRight": "啊啦不好"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_051.exp.json",
+                        "id": 101700,
+                        "motion": 300
+                    }
+                ],
+                "textRight": "难道是，@看到了奇怪的东西吗？"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 0
+                    }
+                ],
+                "textLeft": "与其说是…奇怪的东西…@好像是…"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 200
+                    }
+                ],
+                "textLeft": "奶焗…汉堡…@一样的…"
+            },
+            {
+                "nameCenter": "？？？",
+                "textCenter": "哦！"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "effect": "emotion_surprise_0",
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 1
+                    }
+                ],
+                "se": "7226_shock",
+                "textLeft": "诶？"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_051.exp.json",
+                        "id": 101700,
+                        "motion": 0
+                    }
+                ],
+                "textRight": "啊啦"
+            },
+            {
+                "autoTurnLast": 0.01,
+                "bgm": "stop",
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101000,
+                        "motion": 0,
+                        "pos": 1
+                    }
+                ],
+                "turnChangeIn": "rollInFast"
+            },
+            {
+                "bgm": "bgm03_story09",
+                "chara": [
+                    {
+                        "id": 101000,
+                        "motion": 200
+                    }
+                ],
+                "nameCenter": "桃子",
+                "textCenter": "小伊[se:7107_arrivalone]@到这来了啊！",
+                "turnChangeOut": "rollOutFast"
+            },
+            {
+                "autoTurnLast": 0.01,
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_051.exp.json",
+                        "id": 101700,
+                        "motion": 0,
+                        "pos": 2
+                    },
+                    {
+                        "cheek": 1,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 401,
+                        "pos": 0
+                    }
+                ],
+                "turnChangeIn": "rollInFast"
+            },
+            {
+                "chara": [
+                    {
+                        "id": 100100,
+                        "motion": 401
+                    }
+                ],
+                "nameLeft": "伊吕波",
+                "nameRight": "御魂",
+                "textLeft": "桃子小姐！",
+                "turnChangeOut": "rollOutFast"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101700,
+                        "motion": 300
+                    }
+                ],
+                "textRight": "哎呀，@随意进入手术室这样的事情"
+            },
+            {
+                "autoTurnLast": 0.02,
+                "chara": [
+                    {
+                        "id": 101700,
+                        "pos": 0
+                    }
+                ],
+                "textClear": 1
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_030.exp.json",
+                        "id": 101000,
+                        "motion": 0,
+                        "pos": 2
+                    }
+                ],
+                "nameRight": "桃子",
+                "textRight": "平日，@这里都让我严加看守…"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "id": 101000
+                    }
+                ],
+                "textRight": "也差不多是一半这里的人了吧"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_011.exp.json",
+                        "id": 101700,
+                        "motion": 100
+                    }
+                ],
+                "nameLeft": "御魂",
+                "textLeft": "嘛！@[chara:101700:effect_emotion_joy_0][se:7222_happy]看来，能更随意地吩咐你了呢"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_030.exp.json",
+                        "id": 101000,
+                        "motion": 0
+                    }
+                ],
+                "textRight": "那还是算了吧"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_030.exp.json",
+                        "id": 100100,
+                        "motion": 0,
+                        "pos": 0
+                    },
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101000,
+                        "motion": 1
+                    }
+                ],
+                "textRight": "那么？感觉怎么样？@慢慢变强了吗？"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 0
+                    }
+                ],
+                "nameLeft": "伊吕波",
+                "textLeft": "嗯…@感觉是…"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_051.exp.json",
+                        "id": 101700,
+                        "motion": 200,
+                        "pos": 2
+                    }
+                ],
+                "nameRight": "御魂",
+                "textRight": "手术还没有结束哦@可能会发生一点不适"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100
+                    }
+                ],
+                "textLeft": "不适…?"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101000,
+                        "motion": 100,
+                        "pos": 2
+                    }
+                ],
+                "nameRight": "桃子",
+                "textRight": "哈哈@就是说，你还没有吃午饭吧？"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_011.exp.json",
+                        "id": 101700,
+                        "motion": 0,
+                        "pos": 2
+                    }
+                ],
+                "nameRight": "御魂",
+                "textRight": "嗯，你说的对"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_030.exp.json",
+                        "id": 100100,
+                        "motion": 400
+                    }
+                ],
+                "textLeft": "诶？诶？那个，@那是什么意思…！？"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_011.exp.json",
+                        "id": 101000,
+                        "motion": 1,
+                        "pos": 2
+                    }
+                ],
+                "nameRight": "桃子",
+                "textRight": "哈哈，别担心！@没什么紧急的事情哦！"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101000
+                    }
+                ],
+                "textRight": "这家伙，肚子饿了的话@手术的状态就不好哦"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 1,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 0
+                    }
+                ],
+                "textLeft": "那…所以说…@奶焗汉堡…?"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101700,
+                        "motion": 0,
+                        "pos": 2
+                    }
+                ],
+                "nameRight": "御魂",
+                "textRight": "呼呼，是的是的"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_011.exp.json",
+                        "id": 101700,
+                        "motion": 300
+                    }
+                ],
+                "textRight": "今天想吃奶焗汉堡呢"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101000,
+                        "motion": 1,
+                        "pos": 2
+                    }
+                ],
+                "nameRight": "桃子",
+                "textRight": "真是的…肚子饿了@生意也就没法做了吧"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101000
+                    }
+                ],
+                "textRight": "正好@我也还没吃午饭呢"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101000
+                    }
+                ],
+                "textRight": "现在就去午饭休息吧"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_011.exp.json",
+                        "id": 101700,
+                        "motion": 200,
+                        "pos": 2
+                    }
+                ],
+                "nameRight": "御魂",
+                "textRight": "呼呼，是呢@[chara:101700:lipSynch_0][wait:1.0][chara:101700:cheek_0][chara:101700:face_mtn_ex_010.exp.json][chara:101700:lipSynch_1]小伊也没有吃午饭？"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 1,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 401
+                    }
+                ],
+                "textLeft": "诶？@啊，啊啊…是的…！"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 0,
+                        "face": "mtn_ex_010.exp.json",
+                        "id": 101700,
+                        "motion": 0
+                    }
+                ],
+                "textRight": "那么，务必一起吧？"
+            },
+            {
+                "chara": [
+                    {
+                        "cheek": 1,
+                        "face": "mtn_ex_050.exp.json",
+                        "id": 100100,
+                        "motion": 400,
+                        "mouthOpen": 0
+                    }
+                ],
+                "textLeft": "诶…!@那，那个…!"
+            },
+            {
+                "autoTurnLast": 2,
+                "turnChangeIn": "fadeIn"
+            }
+        ]
+    },
+    "version": 3
+}
