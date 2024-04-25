@@ -27,6 +27,29 @@
         <!--        bg-->
         <canvas id="gameCanvas" width="1920" height="1080" style="outline:none;width:100%;height:100%;"
                 class="gameCanvas" tabindex="99"></canvas>
+        <!--  story   -->
+        <div class="story_page" style="position:absolute;top:0;width:100%;height:100%;background-color:#fff;">
+            <img id="story_bg" src="image/package/story/narration.png" style="width:100%;height:100%;object-fit: cover;">
+            <img id="story_log" src="image/package/story/story_ui_log_b.png" style="position:absolute;left:0.2rem;top:0;width:1rem;">
+            <img id="story_auto" src="image/package/story/story_ui_auto_b.png" style="position:absolute;left:0.2rem;top:1.3rem;width:1rem;">
+<!--            <img src="image/package/story/story_ui_pause_b_on.png" style="position:absolute;left:0.2rem;top:2.6rem;width:1rem;">-->
+            <img id="story_log_ui_r" src="image/package/story/story_ui_fukidashi_01_r.png" style="display:none;position:absolute;left:4rem;bottom:0.8rem;width:11rem;z-index:1;">
+            <p id="story_context_r" style="display:none;position:absolute;left:5.2rem;top:7.2rem;width:8.2rem;z-index:1;color:#5C5C5C;font-size:0.5rem;">
+            </p>
+            <p id="story_name_r" style="display:none;position:absolute;right:5.6rem;bottom:3.2rem;z-index:1;color:#EEEBE5;font-size:0.3rem;">
+            </p>
+            <img id="story_log_ui_l" src="image/package/story/story_ui_fukidashi_01_l.png" style="display:none;position:absolute;left:4rem;bottom:0.8rem;width:11rem;z-index:1;">
+            <p id="story_context_l" style="display:none;position:absolute;left:5.2rem;top:7.2rem;width:8.2rem;z-index:1;color:#5C5C5C;font-size:0.5rem;">
+            </p>
+            <p id="story_name_l" style="display:none;position:absolute;left:5.4rem;bottom:3.2rem;z-index:1;color:#EEEBE5;font-size:0.3rem;">
+            </p>
+            <img id="story_log_ui_c" src="image/package/story/story_ui_fukidashi_03_r.png" style="display:none;position:absolute;left:4rem;bottom:0.8rem;width:11rem;z-index:1;">
+            <p id="story_context_c" style="display:none;position:absolute;left:5.2rem;top:7.2rem;width:8.2rem;z-index:1;color:#5C5C5C;font-size:0.5rem;">
+            </p>
+            <p id="story_name_c" style="display:none;position:absolute;left:8.6rem;bottom:3.2rem;z-index:1;color:#EEEBE5;font-size:0.3rem;">
+            </p>
+            <img id="story_skip" src="image/package/story/story_ui_skip.png" style="position:absolute;right:0.2rem;top:0.2rem;height:0.6rem;z-index:1;">
+        </div>
         <!--   main_page left-->
         <div style="width:1.3rem;margin-left:0.2rem;margin-top:0.1rem;position:absolute;left:0;top:0;z-index: 1;display: flex;flex-direction:column;align-items:center;">
             <img class="char setting" id="back_main" src="./image/image_web\common\global\global_back.png"
@@ -94,7 +117,7 @@
         </div>
         <!--    main_page live2d-->
         <div class="zimu"></div>
-        <canvas class="main" id="canvas" style="position:absolute;top:0;left:0;height:100%;z-index:3;"></canvas>
+        <canvas class="main" id="canvas" style="position:absolute;top:0;left:0;height:100%;"></canvas>
         <!--    char_page left-->
         <div class="char" id="char_left" style="position:absolute;left: 0%;top:0%;width: 4.5rem;display: none;">
             <img src="./image/image_web\page\chara\bg_chara_data.png" style="width: 100%;">
@@ -395,14 +418,6 @@
                    </div>
                 </div>
             </div>
-        </div>
-        <!--  story   -->
-        <div class="story_page" style="position:absolute;top:0;width:100%;height:100%;background-color:#fff;z-index:2;">
-            <img id="story_bg" src="image/package/story/narration.png" style="width:100%;height:100%;">
-            <img id="story_log" src="image/package/story/story_ui_log_b.png" style="position:absolute;left:0.2rem;top:0;width:1rem;">
-            <img id="story_auto" src="image/package/story/story_ui_auto_b.png" style="position:absolute;left:0.2rem;top:1.3rem;width:1rem;">
-<!--            <img src="image/package/story/story_ui_pause_b_on.png" style="position:absolute;left:0.2rem;top:2.6rem;width:1rem;">-->
-            <img id="story_skip" src="image/package/story/story_ui_skip.png" style="position:absolute;right:0.2rem;top:0.2rem;height:0.6rem;">
         </div>
     </div>
 </div>

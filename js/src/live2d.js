@@ -247,8 +247,7 @@ async function _show(model, pos_x) {
 }
 
 async function _show2(model, pos_x) {
-    const settings = new PIXI.live2d.Cubism4ModelSettings(model);
-    const live2dSprite = await PIXI.live2d.Live2DModel.from(settings);
+    const live2dSprite = await PIXI.live2d.Live2DModel.from(model);
     app.stage.addChild(live2dSprite);
     live2dSprite.scale.set(0.5, 0.5);
     live2dSprite.x=pos_x
@@ -257,26 +256,56 @@ async function _show2(model, pos_x) {
     // live2d动作和表情映射列表
     let motions_list = {}
     let exp_list = {}
-    init_motions_and_exp()
-    // 当前live2d对应的所有动画组
-    let groups_dic = {}
-    // 要运行的动画
-    var motion_list = []
 
-    function init_motions_and_exp(){
-        let motions = live2dSprite.internalModel.motionManager.definitions["Motion"]
-        for(let i=0;i<motions.length;i++){
-            motions_list[parseInt(motions[i]["Name"].split("_")[1])] = i
-        }
-        let exp = live2dSprite.internalModel.motionManager.expressionManager.definitions
-        for(let i=0;i<exp.length;i++){
-            exp_list[exp[i]["Name"].slice(0,14)+exp[i]["Name"].slice(15)] = i
-        }
+
+    let motions = live2dSprite.internalModel.motionManager.definitions["Motion"]
+    for(let i=0;i<motions.length;i++){
+        motions_list[parseInt(motions[i]["Name"].split("_")[1])] = i
     }
-    live2dSprite.groups_dic=groups_dic
-    live2dSprite.motion_list=motion_list
+    let exp = live2dSprite.internalModel.motionManager.expressionManager.definitions
+    for(let i=0;i<exp.length;i++){
+        exp_list[exp[i]["Name"].slice(0,14)+exp[i]["Name"].slice(15)] = i
+    }
+//    live2dSprite.motions_list=motions_list
+//    live2dSprite.exp_list=exp_list
+//    console.log(motions_list)
+//    console.log(exp_list)
+    live2dSprite.internalModel.on('afterMotionUpdate', run)
+    live2dSprite.change_motion=function(m){
+        live2dSprite.internalModel.motionManager.stopAllMotions()
+        live2dSprite.motion("Motion",motions_list[m])
+    }
+    live2dSprite.change_exp=function(e){
+        live2dSprite.expression(exp_list[e])
+    }
+    let playing = false;
+    let v = 0.2;
+    function setMouthOpenY(){
+        let a = Math.random();
+        if(a>0.5){
+            v+=0.1
+        }else{
+            v-=0.1
+        }
+        v = Math.max(0,Math.min(1,v));
+//        console.log(v)
+        live2dSprite.internalModel.coreModel.setParameterValueById('ParamMouthOpenY',v);
+    }
+    function run(){
+        if(!playing) return;
+        setMouthOpenY();
+    }
+    live2dSprite.start_m=function(){
+         playing = true;
+    }
+    live2dSprite.stop_m=function(){
+        playing = false;
+        live2dSprite.internalModel.coreModel.setParameterValueById('ParamMouthOpenY',0);
+    }
+
+    return live2dSprite
 }
 
 
 function show(path, model, pos_x) {getModel(path, model,  pos_x,_show); }
-function show2(path, model, pos_x) {getModel(path, model,  pos_x,_show2); }
+function show2(path, model, pos_x) { return _show2(path+model, pos_x); }

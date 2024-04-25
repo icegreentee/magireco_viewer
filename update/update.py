@@ -239,8 +239,8 @@ def gen_chara_json():
             dic[i]["live2d"] = live2d_data[i]
             dic[i]["cn"] = cn_data[i]
         else:
-            print("更新失败，数据不一致")
-            return 0
+            dic[i]["live2d"] = live2d_data[i]
+            dic[i]["cn"] = "暂无（等wiki更新）"
     os.remove("./charaCard.json")
     with open("./chara_data.json", "w", encoding="utf-8") as f:
         json.dump(dic, f, indent=4, ensure_ascii=False)

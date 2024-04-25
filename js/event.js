@@ -233,3 +233,7 @@ $("#global_quest").click(function(){
 $("#story_click").click(function(){
     start_story()
 })
+
+$("#story_skip").click(function(){
+    global_quest_page()
+})

@@ -16,7 +16,7 @@ if(localStorage.current_bg_res){
 }
 
 //主角色
-let fav_char_id="2700"
+let fav_char_id="2007"
 let fav_char_rank=5
 if(localStorage.fav_char_id){
     fav_char_id = localStorage.fav_char_id
@@ -98,7 +98,7 @@ function adjust_page(){
 	last_canvas_data={"w":current_w,"h":current_h}
 }
 function initLive2d(){
-    init(2280,1520);
+    init(2700,1520);
     //获取服装目录
 	fetchLocal("./update/chara_data.json").then(r => r.json(), alert)
 	.then(list => {
@@ -158,7 +158,7 @@ function show_live2d(){
         }
         fetchLocal(jsonfile).then(r => r.json(), alert).then(list => {
             char_group = list["story"];
-            show("./image/image_native/live2d_v4/"+customs[custom_index]+"/", "model.model3.json", -100);
+            show("./image/image_native/live2d_v4/"+customs[custom_index]+"/", "model.model3.json", 0);
             show("./image/image_native/live2d_v4/"+customs2[custom2_index]+"/", "model.model3.json", 700);
         })
     }
@@ -198,7 +198,8 @@ function startScene(){
             bg_data = list
             main_page()
 //            char_page()
-            global_quest_page()
+//            global_quest_page()
+//            start_story()
         });
     };
     cc.game.run();
