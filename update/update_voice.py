@@ -70,7 +70,9 @@ def get_all_char_list():
     char_list = []
     char_list2 = []
     for i in data:
-        if int(i) >= 1001:
+        if i=="updateTime":
+            continue
+        if int(i) >= 3901:
             txt = urllib.parse.quote(data[i]["cn"], safe='/:?&=')
             char_list.append("https://magireco.moe/wiki/" + txt)
             char_list2.append(data[i]["cn"])

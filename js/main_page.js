@@ -122,21 +122,21 @@ async function run_story(story_list){
         }
         if("chara" in story_data){
             for(let chara_i = 0;chara_i<story_data["chara"].length;chara_i++){
-                let chara_data = story_data["chara"][chara_i];
-                if("pos" in chara_data){
+                let chara_info = story_data["chara"][chara_i];
+                if("pos" in chara_info){
                     let del_char = []
-                    if(chara_data["id"] in id_pos){
+                    if(chara_info["id"] in id_pos){
 //                    将已经存在的live2d删除
-                        del_char.push(pos_chara[id_pos[chara_data["id"]]])
-                        delete pos_chara[id_pos[chara_data["id"]]];
-                        delete id_pos[chara_data["id"]];
+                        del_char.push(pos_chara[id_pos[chara_info["id"]]])
+                        delete pos_chara[id_pos[chara_info["id"]]];
+                        delete id_pos[chara_info["id"]];
                     }
-                    if(chara_data["pos"] in pos_chara){
+                    if(chara_info["pos"] in pos_chara){
 //                    将该位置的live2d删除
-                        del_char.push(pos_chara[chara_data["pos"]]);
-                        delete pos_chara[chara_data["pos"]];
+                        del_char.push(pos_chara[chara_info["pos"]]);
+                        delete pos_chara[chara_info["pos"]];
                         for(let one in id_pos){
-                            if(id_pos[one]==chara_data["pos"] ){
+                            if(id_pos[one]==chara_info["pos"] ){
                                 delete id_pos[one];
                                 break;
                             }
@@ -150,14 +150,14 @@ async function run_story(story_list){
                         console.log(del_char[del_i])
                     }
 
-                    await show_story_live2d(chara_data["id"],chara_data["pos"],pos_chara)
-                    id_pos[chara_data["id"]]=chara_data["pos"]
+                    await show_story_live2d(chara_info["id"],chara_info["pos"],pos_chara)
+                    id_pos[chara_info["id"]]=chara_info["pos"]
                 }
-                if("motion" in chara_data){
-                    pos_chara[id_pos[chara_data["id"]]].change_motion(chara_data["motion"])
+                if("motion" in chara_info){
+                    pos_chara[id_pos[chara_info["id"]]].change_motion(chara_info["motion"])
                 }
-                if("face" in chara_data){
-                    pos_chara[id_pos[chara_data["id"]]].change_exp(chara_data["face"])
+                if("face" in chara_info){
+                    pos_chara[id_pos[chara_info["id"]]].change_exp(chara_info["face"])
                 }
             }
         }

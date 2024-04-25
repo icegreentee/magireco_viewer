@@ -49,6 +49,9 @@ function add_chara_list(par=null){
 	current_chara= fav_char_id
 	current_chara_rank= fav_char_rank
 	for(let i in chara_data){
+	    if(i=="updateTime"){
+	        continue;
+	    }
 	    if(par!=null){
             if(par["attr"].length>0&& !par["attr"].includes(chara_data[i]["attr"].toLowerCase())) {
                 continue

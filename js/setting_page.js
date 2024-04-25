@@ -9,5 +9,5 @@ function setting_page(){
 	    $("#live2d_num_checkbox1").show()
 	    $("#live2d_num_checkbox2").hide()
 	}
-
+    $("#update_time").text(chara_data["updateTime"])
 }
