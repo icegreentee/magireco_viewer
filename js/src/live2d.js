@@ -100,7 +100,7 @@ async function _show(model, pos_x) {
         }
         let exp = live2dSprite.internalModel.motionManager.expressionManager.definitions
         for(let i=0;i<exp.length;i++){
-            exp_list[exp[i]["Name"].slice(0,14)+exp[i]["Name"].slice(15)] = i
+            exp_list[exp[i]["Name"].split(".")[0]] = i
         }
     }
     // 播放声音
@@ -127,7 +127,7 @@ async function _show(model, pos_x) {
                     dic["motion"] = motions_list[chara["motion"]]
                 }
                 if("face" in chara){
-                    dic["face"] = exp_list[chara["face"]]
+                    dic["face"] = exp_list[chara["face"].split(".")[0]]
                 }
                 motion_list.push(dic)
             }
