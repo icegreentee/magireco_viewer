@@ -127,7 +127,8 @@
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
-                ]
+                ],
+                "abiFilters" : [ "armeabi-v7a", "arm64-v8a" ]
             },
             /*使用Native.js调用原生安卓API需要使用到的系统权限*/
             "orientation" : [ "portrait-primary" ], /*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
@@ -198,6 +199,12 @@
                     "xxhdpi" : "image/icons/mipmap-xxhdpi/ic_launcher_background.png" /*1080P高分屏启动图片，分辨率：1080x1882*/
                 },
                 "androidStyle" : "default"
+            },
+            "ios" : {
+                "dSYMs" : false
+            },
+            "plugins" : {
+                "ad" : {}
             }
         }
     },
