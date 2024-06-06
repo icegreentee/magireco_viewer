@@ -61,6 +61,7 @@ async function _show(model, pos_x) {
     live2dSprite.scale.set(0.5, 0.5);
     live2dSprite.x=pos_x
     live2dSprite._autoInteract = false
+    console.log(live2dSprite)
     play_sound = function(set_group){
         if(playing||delay_play){
             console.log("stop_replay")
@@ -92,6 +93,7 @@ async function _show(model, pos_x) {
     let groups_dic = {}
     // 要运行的动画
     var motion_list = []
+//    live2dSprite.internalModel.eyeBlink._parameterIds=[]
 
     function init_motions_and_exp(){
         let motions = live2dSprite.internalModel.motionManager.definitions["Motion"]
@@ -129,13 +131,21 @@ async function _show(model, pos_x) {
                 if("face" in chara){
                     dic["face"] = exp_list[chara["face"].split(".")[0]]
                 }
+                if("cheek" in chara){
+                    dic["cheek"] = chara["cheek"]
+                }
+                if("eyeClose" in chara){
+                    dic["eyeClose"] = 1-chara["eyeClose"]
+                }
                 motion_list.push(dic)
             }
             console.log("add_finish")
             run_motion();
     }
-
-    var motion_task = null
+    var cheekv = 0;
+    var eyeclosev = 1;
+    var motion_task = null;
+//    var eyeBlink_data = live2dSprite.internalModel.eyeBlink._parameterIds;
     async function run_motion(){
         if(motion_list.length==0){
             return;
@@ -152,6 +162,12 @@ async function _show(model, pos_x) {
         if("face" in motion){
             live2dSprite.expression(motion["face"])
         }
+        if("cheek" in motion){
+            cheekv = motion["cheek"]-1;
+        }
+        if("eyeClose" in motion){
+            eyeclosev = motion["eyeClose"]
+        }
         motion_task=setTimeout(run_motion, motion["time"])
     }
     function setMouthOpenY(v){
@@ -162,12 +178,15 @@ async function _show(model, pos_x) {
     const arrayAdd = a=>a.reduce((i,a)=>i+a,0);
     function run(){
             if(!playing) return;
+            live2dSprite.internalModel.coreModel.setParameterValueById("ParamEyeLOpen",eyeclosev);
+            live2dSprite.internalModel.coreModel.setParameterValueById("ParamEyeROpen",eyeclosev);
+            live2dSprite.internalModel.coreModel.setParameterValueById("ParamCheek",cheekv);
             const arr = [];
             for (var i = 0; i < 700; i += o) {
                 arr.push(getByteFrequencyData()[i]);
             }
             setMouthOpenY((arrayAdd(arr)/arr.length - 20)/60);
-            setTimeout(run,1000/30);
+//            setTimeout(run,1000/30);
     }
     function stop_motion(){
         console.log("stop_motion")
