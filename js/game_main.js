@@ -42,9 +42,13 @@ if(localStorage.is_show_fav2){
 var chara_data={}
 var bg_data={}
 var zimu_data={}
+var loaded = false;
 $(document).ready(function(){
-    adjust_page();
-	initLive2d();
+    if (!loaded) {
+        loaded = true;
+        adjust_page();
+        initLive2d();
+    }
 });
 
 $(window).resize( function  () {
