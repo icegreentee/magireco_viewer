@@ -145,14 +145,16 @@ async function _show(model, pos_x) {
     var cheekv = 0;
     var eyeclosev = 1;
     var motion_task = null;
-//    var eyeBlink_data = live2dSprite.internalModel.eyeBlink._parameterIds;
+    var eyeBlink_data = live2dSprite.internalModel.eyeBlink._parameterIds;
     async function run_motion(){
+        live2dSprite.internalModel.eyeBlink._parameterIds=[]
         if(motion_list.length==0){
+            console.log("motion_end")
             return;
         }
         let motion = motion_list.shift()
+        console.log(motion)
         if("voice" in motion){
-            console.log(motion["voice"])
             await loadSound(motion["voice"])
         }
         if("motion" in motion){
@@ -163,7 +165,7 @@ async function _show(model, pos_x) {
             live2dSprite.expression(motion["face"])
         }
         if("cheek" in motion){
-            cheekv = motion["cheek"]-1;
+            cheekv = motion["cheek"];
         }
         if("eyeClose" in motion){
             eyeclosev = motion["eyeClose"]
@@ -177,9 +179,9 @@ async function _show(model, pos_x) {
     const o = 100;
     const arrayAdd = a=>a.reduce((i,a)=>i+a,0);
     function run(){
-            if(!playing) return;
             live2dSprite.internalModel.coreModel.setParameterValueById("ParamEyeLOpen",eyeclosev);
             live2dSprite.internalModel.coreModel.setParameterValueById("ParamEyeROpen",eyeclosev);
+            if(!playing) return;
             live2dSprite.internalModel.coreModel.setParameterValueById("ParamCheek",cheekv);
             const arr = [];
             for (var i = 0; i < 700; i += o) {
@@ -229,7 +231,7 @@ async function _show(model, pos_x) {
                 // 停止播放
                 playing = false;
                 source.disconnect();
-//                console.log(source)
+                console.log("sound_stop")
                 source = null;
                 $(".zimu").hide()
                 document.removeEventListener('click', stop_motion);
