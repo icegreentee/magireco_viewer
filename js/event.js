@@ -237,3 +237,7 @@ $("#story_click").click(function(){
 $("#story_skip").click(function(){
     global_quest_page()
 })
+
+$("#avatar_goto").click(function(){
+    chara_live2d_page()
+})

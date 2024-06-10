@@ -1,3 +1,5 @@
+var current_chara= fav_char_id
+var current_chara_rank= fav_char_rank
 function char_page(){
 	add_chara_list()
 	char_left_load()
@@ -144,7 +146,10 @@ function char_left_load(){
 
 function chara_live2d_page(){
     $(".char").hide()
+    $(".main").hide()
     $(".char_live2d").show()
+    $("#back_char").hide()
+    $("#back_main").show()
     // bg change
     window.bg_res="image/image_native/bg/web/web_0015.ExportJson"
 	window.bg_name="web_0015"

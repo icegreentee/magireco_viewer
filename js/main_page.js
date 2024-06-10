@@ -1,8 +1,9 @@
 function main_page(){
-	$("#chara_avater").attr('src', './image/image_native/card/image/card_'+fav_char_id+fav_char_rank+'_f.png');
+	$("#chara_avatar").attr('src', './image/image_native/card/image/card_'+fav_char_id+fav_char_rank+'_f.png');
 	$(".char").hide()
 	$(".setting").hide()
 	$(".bg_change").hide()
+	$(".char_live2d").hide()
 	$(".global_quest_page").hide()
 	$(".main").show()
 	if(is_show_fav2=="y"){
