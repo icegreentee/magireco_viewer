@@ -50,10 +50,19 @@ $(document).ready(function(){
         initLive2d();
     }
 });
+function debounce(fn, delay) {
+        let timer = null;
+        return function () {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            fn.apply(this, arguments);
+          }, delay);
+        };
+      }
 
-$(window).resize( function  () {
-	adjust_page();
-})
+$(window).resize(
+    debounce(adjust_page,1000)
+)
 
 function fetchLocal(url, data) {
   return new Promise(function(resolve, reject) {
